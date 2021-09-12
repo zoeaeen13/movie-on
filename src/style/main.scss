@@ -1,0 +1,9 @@
+@import "./reset";
+@import "./colors";
+@import "./groble.scss";
+
+// pages
+@import '../pages/Home/Home';
+
+// components
+@import "../components/App/App";

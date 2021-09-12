@@ -1,0 +1,39 @@
+body {
+  background: #141414;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,.7) 10%, rgba(0,0,0,0));
+  z-index: 10;
+  padding: 0 52px;
+  .navbar-list {
+    display: flex;
+    a {
+      color: #e5e5e5;
+      margin-left: 18px;
+      text-decoration: none;
+      transition: color .4s;
+      &:hover {
+        color: #b3b3b3;
+      }
+      &.active {
+        font-weight: bold;
+        color: white;
+      }
+    }
+  }
+  .rs-btn-default {
+    background: transparent;
+    margin-right: 15px;
+  }
+  .rs-icon {
+    color: white;
+  }
+}
