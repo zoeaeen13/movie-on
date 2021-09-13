@@ -1,30 +1,30 @@
 import React, { useState, useRef } from 'react';
 import Slider from 'react-slick';
+import MovieCard from './MovieCard'
 
 const fakeList = [
-  'mbsrf4OICR4',
-  'wBr2O6_es2U',
-  'gj-VU9oK2Yo',
-  '0AUFyFEt35g',
-  'gUWDiXBNohY',
-  'A5H8zBb3iao',
-  'tyrVtwE8Gv0',
-  'WkuHLzMMTZM',
-  'azr7saygKng',
-  'TxlDDhQq8zM',
-  'W14UHY9esZM',
-  'O8Xq4xfH2ro',
-  '6MEyBnVss9Q',
-  'JDTQL9qowzA',
+  {id:'mbsrf4OICR4'},
+  {id:'wBr2O6_es2U'},
+  {id:'gj-VU9oK2Yo'},
+  {id:'0AUFyFEt35g'},
+  {id:'gUWDiXBNohY'},
+  {id:'A5H8zBb3iao'},
+  {id:'tyrVtwE8Gv0'},
+  {id:'WkuHLzMMTZM'},
+  {id:'azr7saygKng'},
+  {id:'TxlDDhQq8zM'},
+  {id:'W14UHY9esZM'},
+  {id:'O8Xq4xfH2ro'},
+  {id:'6MEyBnVss9Q'},
+  {id:'JDTQL9qowzA'}
 ]
 
 // eslint-disable-next-line react/prop-types
-export const MovieList = ({ currentId, setCurrentMovie }) => {
-  const [enterTime, setEnterTime] = useState(0)
+export const MovieList = () => {
   const sliderRef = useRef(null)
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 6,
     slidesToScroll: 6,
@@ -54,34 +54,7 @@ export const MovieList = ({ currentId, setCurrentMovie }) => {
         },
       },
     ],
-  };
-
-  const handleMouseEvent = (e) => {
-    setEnterTime(new Date().getSeconds())
-    console.log('in', new Date().getSeconds())
-
-    const element = e.currentTarget
-    setCurrentMovie({
-      id: element.dataset.id,
-      x: element.getBoundingClientRect().left,
-      y: element.getBoundingClientRect().top,
-    })
-  };
-
-  const handleMouseLeave = (e) => {
-    const time  = new Date().getSeconds()
-    console.log('leave', time)
-
-    setTimeout(() => {
-      if (time - enterTime <= 1) return
-      setCurrentMovie({
-        id: '',
-        x: 0,
-        y: 0,
-      })
-    }, 1000)
-  };
-  
+  }  
 
   return (
     <div className="movie-list">
@@ -91,9 +64,7 @@ export const MovieList = ({ currentId, setCurrentMovie }) => {
         <Slider {...settings} ref={sliderRef}>
           {fakeList.map((data) => {
             return (
-              <div className="movie-card" key={data} data-id={data} onMouseEnter={handleMouseEvent} onMouseLeave={handleMouseLeave}>
-              {/* <div className="movie-card-img" onMouseEnter={(e) => console.log(`${data} (${e.screenX},${e.screenX})`)} onMouseLeave={(e) => console.log(`${data} (${e.screenX},${e.screenX})`)} /> */}
-            </div>
+              <MovieCard key={data.id} data={data}/>
           )})}
         </Slider>
         <button className="btn-next" onClickCapture={() => sliderRef.current?.slickNext()}>右邊</button>

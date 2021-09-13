@@ -7,6 +7,10 @@
   height: 56vw;
   max-height: 100vh;
   z-index: 1;
+  background-image: url('https://news.agentm.tw/wp-content/uploads/COVER.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
   .info {
     position: absolute;
     top: 0;
@@ -69,9 +73,10 @@
 .movie-list {
   margin: 3vh 0;
   position: relative;
+  overflow: hidden;
   .slider-container {
     display: block;
-    width: 100%;
+    width: 100vw;
     padding: 0 52px;
     overflow: hidden;
     .slick-track {
@@ -109,16 +114,14 @@
   }
 }
 
+.movie-card-info * {
+  border: 1px solid gold;
+}
+
 .movie-floating-card {
-  display: block;
   position: absolute;
-  width:400px;
-  top: 0;
-  left: 0;
-  z-index: 10;
   background-color: #181818;
   border-radius: 6px;
-  transform: scale(1);
   opacity: 1;
   transition-duration: 1s;
   .movie-card-info {
@@ -155,5 +158,19 @@
         }
       }
     }
+  }
+}
+
+.pop-up-animation {
+  opacity: 0;
+  transition: 1s;
+  // pointer-events: none;
+  &.show {
+    opacity: 100;
+    // pointer-events: initial;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  &.hidden {
+    opacity: 0;
   }
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Icon } from 'rsuite';
 import { Link } from 'react-router-dom';
-
 export const Banner = () => {
+
   return (
     <div className="home-banner">
       <div className="info">
