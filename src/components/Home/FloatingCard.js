@@ -29,7 +29,7 @@ const FloatingCard = React.memo(({ id, style, visible, closeModal, setVisible })
         <div className="movie-card-info">
           <iframe
             style={iframeStyle}
-            src={`https://www.youtube.com/embed/${id}`}
+            src={`https://www.youtube.com/embed/${id}?rel=0&autoplay=1&mute=1&enablejsapi=1`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           ></iframe>
