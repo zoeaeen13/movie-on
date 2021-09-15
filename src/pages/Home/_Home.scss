@@ -70,8 +70,18 @@
   }
 }
 
-.movie-list {
+.movie-list-wrapper {
   margin: 3vh 0;
+  .movie-list-title {
+    display: inline-block;
+    line-height: 1.25vw;
+    font-size: 1.4vw;
+    color: #e5e5e5;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+}
+.movie-list {
   position: relative;
   overflow: hidden;
   .slider-container {
@@ -91,7 +101,7 @@
     }
   }
   button {
-    width: 52px;
+    width: 4%;
     height: 100%;
     position: absolute;
     top: 0;
@@ -107,24 +117,31 @@
   .movie-card {
     width: 100%;
     height: 0;
-    padding: 28.125% 0;
-    border-radius: 4px;
+    padding-bottom: 56%;
+    border-radius: 7px;
     background-color: white;
     cursor: pointer;
   }
 }
-
-.movie-card-info * {
-  border: 1px solid gold;
-}
-
 .movie-floating-card {
+  overflow: hidden;
   position: absolute;
-  background-color: #181818;
   border-radius: 6px;
-  opacity: 1;
-  transition-duration: 1s;
+  transform-origin: top center;
+  transition: all 2s ease-in-out;
+  &:hover {
+    .movie-card-info {
+      opacity: 1;
+      background: #181818;
+    }
+  }
+  &:first-child {transform-origin: 0px center;}
+  &:last-child {transform-origin: 100% center;}
   .movie-card-info {
+    border-radius: 6px;
+    background-color: #181818;
+    overflow: hidden;
+    opacity: 0;
     iframe {
       width: 100%;
     }
@@ -132,6 +149,7 @@
       margin: 0;
       padding: 16px;
       color: white;
+      background-color: #181818;
       .content-top {
         display: flex;
         justify-content: space-between;
@@ -160,17 +178,48 @@
     }
   }
 }
+.movie-floating-card, .movie-floating-card * {
+  transition: all .5s ease .2s
+}
+
 
 .pop-up-animation {
-  opacity: 0;
-  transition: 1s;
-  // pointer-events: none;
+  opacity: 1;
+  transition: 0.3s;
+  pointer-events: none;
   &.show {
+    animation: pop-up-show .6s both;
     opacity: 100;
-    // pointer-events: initial;
-    transform: translate(-50%, -50%) scale(1);
+    pointer-events: initial;
   }
   &.hidden {
+    animation: pop-up-disappear .6s both;
     opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes pop-up-show {
+  0% {
+    transform: scale(.5);
+    opacity: 0 !important;
+  }
+  30% {
+    transform: scale(.7);
+    opacity: .5 !important;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1 !important;
+  }
+}
+@keyframes pop-up-disappear {
+  0% {
+    transform: scale(1.12);
+    opacity: 100 !important;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0 !important;
   }
 }

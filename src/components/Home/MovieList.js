@@ -57,17 +57,19 @@ export const MovieList = () => {
   }  
 
   return (
-    <div className="movie-list">
-      <h3>現正熱播</h3>
-      <div className="slider-container">
-        <button className="btn-previous" onClickCapture={() => sliderRef.current?.slickPrev()}>左</button>
-        <Slider {...settings} ref={sliderRef}>
-          {fakeList.map((data) => {
-            return (
-              <MovieCard key={data.id} data={data}/>
-          )})}
-        </Slider>
-        <button className="btn-next" onClickCapture={() => sliderRef.current?.slickNext()}>右邊</button>
+    <div className="movie-list-wrapper">
+      <a className="movie-list-title">現正熱播</a>
+      <div className="movie-list">
+        <div className="slider-container">
+          <button className="btn-previous" onClickCapture={() => sliderRef.current?.slickPrev()} />
+          <Slider {...settings} ref={sliderRef}>
+            {fakeList.map((data) => {
+              return (
+                <MovieCard key={data.id} data={data}/>
+            )})}
+          </Slider>
+          <button className="btn-next" onClickCapture={() => sliderRef.current?.slickNext()} />
+        </div>
       </div>
     </div>
   );

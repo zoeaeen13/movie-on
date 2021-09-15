@@ -1,5 +1,6 @@
 body {
   background: #141414;
+  margin-bottom: 10vh;
 }
 .navbar {
   position: fixed;
@@ -8,14 +9,30 @@ body {
   width: 100%;
   min-height: 60px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   background-image: linear-gradient(to bottom, rgba(0,0,0,.7) 10%, rgba(0,0,0,0));
   z-index: 10;
   padding: 0 52px;
+  .logo {
+    width: 110px;
+    text-decoration: none;
+    font-size: 1.8em;
+    display: inline-block;
+    margin-right: 25px;
+    background-image: url(../../images/movie-on-logo.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    &::before {
+      content: '\e5d0';
+    }
+  }
   .navbar-list {
     display: flex;
     a {
+      font-size: 12px;
+      line-height: 14.5px;
       color: #e5e5e5;
       margin-left: 18px;
       text-decoration: none;
