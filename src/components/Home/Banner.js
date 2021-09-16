@@ -1,6 +1,7 @@
-import React from 'react';
-import { Icon } from 'rsuite';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Icon } from 'rsuite'
+import { Link } from 'react-router-dom'
+
 export const Banner = () => {
 
   return (

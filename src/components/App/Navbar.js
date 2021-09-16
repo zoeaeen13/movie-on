@@ -3,10 +3,11 @@ import { IconButton, Icon, ButtonToolbar } from 'rsuite';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+
   return (
     <nav className="navbar">
-      <a className="logo" href="/" />
-      <ul className="navbar-list">
+      <Link className="logo" to="/" />
+      <ul className="navbar-list" >
         <Link className="active" to="/">
           首頁
         </Link>
