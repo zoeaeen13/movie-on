@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import Slider from 'react-slick';
 import MovieCard from './MovieCard'
+import { Link } from 'react-router-dom';
 
 const fakeList = [
   {id:'mbsrf4OICR4'},
@@ -20,7 +21,7 @@ const fakeList = [
 ]
 
 // eslint-disable-next-line react/prop-types
-export const MovieList = () => {
+export const MovieList = ({ photos }) => {
   const sliderRef = useRef(null)
   const settings = {
     dots: false,
@@ -58,14 +59,14 @@ export const MovieList = () => {
 
   return (
     <div className="movie-list-wrapper">
-      <a className="movie-list-title">現正熱播</a>
+      <Link className="movie-list-title" to="/">現正熱播</Link>
       <div className="movie-list">
         <div className="slider-container">
           <button className="btn-previous" onClickCapture={() => sliderRef.current?.slickPrev()} />
           <Slider {...settings} ref={sliderRef}>
-            {fakeList.map((data) => {
+            {fakeList.map((data, index) => {
               return (
-                <MovieCard key={data.id} data={data}/>
+                <MovieCard key={data.id} data={data} url={photos[index] ? photos[index].urls.regular : ''}/>
             )})}
           </Slider>
           <button className="btn-next" onClickCapture={() => sliderRef.current?.slickNext()} />

@@ -3,7 +3,6 @@ import { Icon } from 'rsuite'
 import { Link } from 'react-router-dom'
 
 export const Banner = () => {
-
   return (
     <div className="home-banner">
       <div className="info">
@@ -23,6 +22,7 @@ export const Banner = () => {
           </Link>
         </div>
       </div>
+      <div className="home-banner-bottom" />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import FloatingCard from './FloatingCard'
 import createModel from '../../utils/createModel'
 
-const  MovieCard = ({ data }) => {
+const  MovieCard = ({ data, url }) => {
   const [visible, setVisible] = useState(false)
   const cardRef = useRef(null)
 
@@ -35,6 +35,7 @@ const  MovieCard = ({ data }) => {
       onMouseEnter={onMouseEnter}
       className="movie-card"
       ref={cardRef}
+      style={{ backgroundImage: `url(${url})`}}
     />
   )
 }
