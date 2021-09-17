@@ -1,0 +1,63 @@
+.black-background {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba($Dark, 0.65);
+  z-index: 100;
+
+  // animation setting class name
+  .black-background {
+    &.black-background-animation {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      &.show {
+        opacity: 100;
+        pointer-events: initial;
+      }
+    }
+  }
+}
+
+.popWarning-wrap {
+	@include warningWrap();
+	z-index: 110;
+	transform: translate(-50%, -50%) scale(0.8);
+}
+.pop-up-animation {
+  opacity: 0;
+  transition: 0.3s;
+  pointer-events: none;
+  &.keyframes-show {
+    animation: pop-up-show 0.3s both;
+    opacity: 100;
+    pointer-events: initial;
+  }
+  &.keyframes-disappear {
+    animation: pop-up-disappear 0.3s both;
+    opacity: 0;
+  }
+}
+
+@keyframes pop-up-show {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0 !important;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 100 !important;
+  }
+}
+@keyframes pop-up-disappear {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 100 !important;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0 !important;
+  }
+}
