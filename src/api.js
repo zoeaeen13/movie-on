@@ -1,14 +1,11 @@
 import axios from 'axios'
 
-const clintId = 'ZPnrkzQxlT7lJa2xaoi9cCGUARFY3UrD6_wUdMB8ZYE'
-
 const API = axios.create({
-    baseURL: 'https://api.unsplash.com',
+    baseURL: 'https://movieon.tw',
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Client-ID ${clintId}`
+        'Content-Type': 'application/json',
     },
-    withCredentials: false,
+    withCredentials: true,
     validateStatus: (status) => {
         return status >= 200 && status <= 500
     }
@@ -33,5 +30,4 @@ API.interceptors.response.use(function (response) {
     return Promise.reject(error)
 })
 
-
-export const getPhotos = () => API.get('/search/photos?query=movie', { per_page: 20 })
+export const getMovies = (params) => API.get('/api/movie/', { params })

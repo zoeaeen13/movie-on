@@ -1,0 +1,1 @@
+export { default as MOVIE_TYPE } from './type'

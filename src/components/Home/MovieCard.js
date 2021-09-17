@@ -1,18 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import FloatingCard from './FloatingCard'
-import createModel from '../../utils/createModel'
+import { removeCards, createModel } from '../../utils'
 
-const  MovieCard = ({ data, url }) => {
+const  MovieCard = ({ data }) => {
   const [visible, setVisible] = useState(false)
   const cardRef = useRef(null)
 
   const onMouseEnter = useCallback(() => {
-    // remove all floating cards
-    const modals = document.querySelectorAll('.floating-card-wrapper')
-    if (modals) modals.forEach(modal => {
-      modal.classList.add('hidden')
-      setTimeout(() => modal.remove(), 100)
-    })
+    removeCards()
     setVisible(true)
   }, [])
 
@@ -21,10 +16,10 @@ const  MovieCard = ({ data, url }) => {
       const clintRect = cardRef.current.getBoundingClientRect()
       createModel(
         <FloatingCard
-          id={data.id}
+          data={data}
           clintRect={clintRect}
           setVisible={setVisible}
-          />
+        />
       )
     }
   }, [visible])
@@ -35,8 +30,9 @@ const  MovieCard = ({ data, url }) => {
       onMouseEnter={onMouseEnter}
       className="movie-card"
       ref={cardRef}
-      style={{ backgroundImage: `url(${url})`}}
-    />
+    >
+      <img src={data.img} />
+    </div>
   )
 }
 export default React.memo(MovieCard)

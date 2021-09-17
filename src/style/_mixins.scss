@@ -189,3 +189,10 @@ h5,
 	width: $w;
 	height: $h;
 }
+
+@mixin setBackgroundImg($url) {
+	background: url($url);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}

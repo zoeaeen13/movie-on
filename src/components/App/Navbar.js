@@ -2,9 +2,9 @@ import React from 'react';
 import { IconButton, Icon, ButtonToolbar } from 'rsuite';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ isTop }) => {
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isTop && 'top'}`}>
       <Link className="logo" to="/" />
       <ul className="navbar-list" >
         <Link className="active" to="/">
