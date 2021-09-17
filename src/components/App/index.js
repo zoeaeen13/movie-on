@@ -13,7 +13,7 @@ const App = () => {
     setTop(y < 150)
 
     // remove floating cards while scrolling
-    if (document.documentElement.scrollTop > 150) removeCards()
+    if (document.documentElement.scrollTop > 150) removeCards('.floating-card-wrapper')
   })
 
   return (

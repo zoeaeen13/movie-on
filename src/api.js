@@ -5,7 +5,7 @@ const API = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
-    withCredentials: true,
+    withCredentials: false,
     validateStatus: (status) => {
         return status >= 200 && status <= 500
     }
@@ -31,3 +31,5 @@ API.interceptors.response.use(function (response) {
 })
 
 export const getMovies = (params) => API.get('/api/movie/', { params })
+export const getMovieDetail = (id) => API.get(`api/detail/${id}`)
+export const getRecommends = (id) => API.get(`api/movie/recommend?&id=${id}`)

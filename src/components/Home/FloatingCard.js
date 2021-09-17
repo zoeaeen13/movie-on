@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { isEmpty } from 'lodash'
+import MovieDetail from './MovieDetail'
+import { createModel } from '../../utils'
+
 
 const handleStyle = ({ width, height, top, left }) => {
   const { availWidth, availHeight } = window.screen
@@ -28,6 +31,10 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
     setVisible(false)
   }
 
+  const onInfoClick = () => {
+    createModel(<MovieDetail id={data.internal} />)
+  }
+
   useEffect(() => {
     const id = setTimeout(() => {
       cardRef.current.classList.remove('hidden')
@@ -41,16 +48,16 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
   }, [])
   
 
-  const { id, main_taiwan_name, main_original_name, imdb_rating, douban_rating, tomator_rating } = data
+  const { id, main_taiwan_name, main_original_name, imdb_rating, douban_rating, tomator_rating, img, url } = data
   return (
     <div className="floating-card-wrapper" style={position}>
       <div className="floating-card hidden centered" style={size} onMouseLeave={onMouseLeave} ref={cardRef}>
         <div className="movie-card-info">
-          <iframe
-            src={`https://www.youtube.com/embed/${data.id}?rel=0&autoplay=1&mute=1&enablejsapi=1`}
+          {url ? <iframe
+            src={`https://www.youtube.com/embed/${url}?rel=0&autoplay=1&mute=1&enablejsapi=1`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          ></iframe>
+          ></iframe> : <img src={img}/>}
           <div className="info-content">
             
             <div className="content-top">
@@ -75,7 +82,9 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
                 <div className="button tomatoes"/>
                 <p className="score">{tomator_rating}</p>
               </div>}
-              <a href={`/movie/${id}`} className="button play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M6 2l52 30L6 62V2z"></path></svg></a>
+              <div className="button play" onClick={() => onInfoClick(id)}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M6 2l52 30L6 62V2z"></path></svg>
+              </div>
             </div>
           </div>
         </div>

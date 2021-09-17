@@ -42,16 +42,16 @@ export const MovieList = ({ title, movies }) => {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
         },
       },
       {
         breakpoint: 576,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
         },
       },
     ],
@@ -63,7 +63,7 @@ export const MovieList = ({ title, movies }) => {
       <div className="movie-list">
         <div className="slider-container">
           <button className="btn-previous" onClickCapture={() => {
-            removeCards()
+            removeCards('.floating-card-wrapper')
             sliderRef.current?.slickPrev()
           }} />
           <Slider {...settings} ref={sliderRef}>
@@ -73,7 +73,7 @@ export const MovieList = ({ title, movies }) => {
             )})}
           </Slider>
           <button className="btn-next" onClickCapture={() => {
-            removeCards()
+            removeCards('.floating-card-wrapper')
             sliderRef.current?.slickNext()
           }} />
         </div>

@@ -190,6 +190,16 @@ h5,
 	height: $h;
 }
 
+@mixin warningWrap($color: transparent) {
+	@include center();
+	width: 80%;
+	top: 45%;
+	background-color: $White;
+	border-radius: 6px;
+	color: $color;
+	overflow: hidden;
+}
+
 @mixin setBackgroundImg($url) {
 	background: url($url);
 	background-size: cover;
