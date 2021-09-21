@@ -9,7 +9,7 @@ const  RecommendCard = ({ data }) => {
     removeCards('.movie-detail-container')
     setTimeout(() => {
       createModel(<MovieDetail id={internal} />)
-    }, 1000)
+    }, 500)
   }
 
   return (

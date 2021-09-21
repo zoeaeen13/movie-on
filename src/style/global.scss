@@ -9,15 +9,11 @@
 
   // animation setting class name
   .black-background {
-    &.black-background-animation {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      &.show {
-        opacity: 100;
-        pointer-events: initial;
-      }
-    }
+    // &.black-background-animation {
+    //   opacity: 0;
+    //   pointer-events: none;
+    //   transition: opacity 1s;
+    // }
   }
 }
 

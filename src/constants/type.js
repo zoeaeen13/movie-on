@@ -1,75 +1,75 @@
 const MOVIE_TYPE = {
-  COMEDY: {
+  Comedy: {
     id: 1,
     name: '喜劇',
     type: 'comedy',
   },
-  FANTASY: {
+  Fantasy: {
     id: 2,
     name: '奇幻',
     type: 'fantasy',
   },
-  ROMANCE: {
+  Romance: {
     id: 3,
     name: '愛情',
     type: 'romance',
   },
-  DRAMA: {
+  Drama: {
     id: 4,
     name: '劇情',
     type: 'drama',
   },
-  ACTION: {
+  Action: {
     id: 5,
     name: '動作',
     type: 'action',
   },
-  SUSPENSE: {
+  Suspense: {
     id: 6,
     name: '懸疑',
     type: 'suspense',
   },
-  WAR: {
+  War: {
     id: 7,
     name: '戰爭',
     type: 'war',
   },
-  ADVENTURE: {
+  Adventure: {
     id: 8,
     name: '冒險',
     type: 'adventure',
   },
-  MYSTERY: {
+  Mystery: {
     id: 11,
     name: '推理',
     type: 'mystery',
   },
-  THRILLER: {
+  Horror: {
     id: 12,
-    name: '驚悚',
-    type: 'thriller',
+    name: '驚悚恐怖',
+    type: 'horror',
   },
-  SCFI: {
+  'Sci-Fi': {
     id: 13,
     name: '科幻',
     type: 'Science fiction',
   },
-  CRIME: {
+  Crime: {
     id: 13,
     name: '犯罪',
     type: 'crime',
   },
-  HISTORICAL: {
+  Historical: {
     id: 16,
     name: '歷史',
     type: 'historical',
   },
-  MUSICAL:  {
+  Musical:  {
     id: 17,
     name: '歌舞',
     type: 'musical',
   },
-  SPORTS:  {
+  Sports:  {
     id: 18,
     name: '體育',
     type: 'sports',

@@ -51,7 +51,7 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
   const { id, main_taiwan_name, main_original_name, imdb_rating, douban_rating, tomator_rating, img, url } = data
   return (
     <div className="floating-card-wrapper" style={position}>
-      <div className="floating-card hidden centered" style={size} onMouseLeave={onMouseLeave} ref={cardRef}>
+      <div className="floating-card hidden" style={size} onMouseLeave={onMouseLeave} ref={cardRef}>
         <div className="movie-card-info">
           {url ? <iframe
             src={`https://www.youtube.com/embed/${url}?rel=0&autoplay=1&mute=1&enablejsapi=1`}
@@ -65,9 +65,9 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
               <p className="preference">{`XX% 適合您`}</p>
             </div>
             <div className="tags">
-              <p>哈哈哈</p>
+              {/* <p>哈哈哈</p>
               <p>嘻嘻</p>
-              <p>嘎嘎嘎</p>
+              <p>嘎嘎嘎</p> */}
             </div>
             <div className="buttons">
               {!isEmpty(imdb_rating) && <div className="icon-button-wrap">

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Banner, MovieList } from '../../components/Home';
 import useFetchMovies from '../../hooks/useFetchMovies'
 import { MOVIE_TYPE } from '../../constants'
 
 const Home = () => {
   const [classicMovies] = useFetchMovies()
-  const [romance] = useFetchMovies({ feature: MOVIE_TYPE.ROMANCE.id })
-  const [mystery] = useFetchMovies({ feature: MOVIE_TYPE.MYSTERY.id })
-  const [triller] = useFetchMovies({ feature: MOVIE_TYPE.THRILLER.id })
+  const [romance] = useFetchMovies({ feature: MOVIE_TYPE['Romance'].id })
+  const [mystery] = useFetchMovies({ feature: MOVIE_TYPE['Mystery'].id })
+  const [triller] = useFetchMovies({ feature: MOVIE_TYPE['Horror'].id })
 
   return (
     <>
