@@ -8,25 +8,27 @@ const handleType = (str) => {
   const typeArr = str.split(',')
   let ans = ''
   typeArr.forEach((type, index) => {
-    ans += (index !== 0 ? '、' : '') + MOVIE_TYPE[type].name
+    if (MOVIE_TYPE[type]) {
+      ans += (index !== 0 ? '、' : '') + MOVIE_TYPE[type].name
+    }
   })
   return ans
 }
 
 const  MovieDetail = ({ id, closeModal }) => {
-  // const [isOpen, setIsOpen] = useState(true)
-  const [firstTimeer, setFirstTimer] = useState(null)
-  const [secondTimer, setSecondTimer] = useState(null)
+  // const [firstTimeer, setFirstTimer] = useState(null)
+  // const [secondTimer, setSecondTimer] = useState(null)
   const [info, setInfo] = useState({})
   const [recommend, setRecommend] = useState([])
   const pageRef = useRef(null)
 
   const handleClose = useCallback(() => {
-    if (pageRef.current) {
-      pageRef.current.classList.add('hidden')
-      const id = setTimeout(() => closeModal(), 500)
-      setSecondTimer(id)
-    }
+    closeModal()
+    // if (pageRef.current) {
+    //   pageRef.current.classList.add('hidden')
+    //   const id = setTimeout(() => closeModal(), 500)
+    //   setSecondTimer(id)
+    // }
 	}, [])
 
   const onButtonClick = (type) => {
@@ -44,8 +46,9 @@ const  MovieDetail = ({ id, closeModal }) => {
   }
 
   const fetchMovieInfo = async() => {
-    const { data } = await getMovieDetail(id)
-    setInfo(data[0])
+    const response = await getMovieDetail(id)
+    if (response.status !== 200) return closeModal()
+    setInfo(response.data[0])
     window.scrollTo({ top: 0 })
   }
 
@@ -58,23 +61,23 @@ const  MovieDetail = ({ id, closeModal }) => {
     fetchMovieInfo()
     fetchRecommended()
     // show
-    const id = setTimeout(() => {
-      if (pageRef.current) {
-        pageRef.current.classList.remove('hidden')
-      }
-    }, 500)
-    setFirstTimer(id)
-    return () => {
-      clearTimeout(firstTimeer)
-      clearTimeout(secondTimer)
-    }
+    // const id = setTimeout(() => {
+    //   if (pageRef.current) {
+    //     pageRef.current.classList.remove('hidden')
+    //   }
+    // }, 500)
+    // setFirstTimer(id)
+    // return () => {
+    //   clearTimeout(firstTimeer)
+    //   clearTimeout(secondTimer)
+    // }
   }, [])
 
   return (
     <div className="movie-detail-container">
       <div onClick={() => handleClose()} className="black-background" />
       {/* <div onClick={() => handleClose()} className={`black-background black-background-animation`} /> */}
-      {!isEmpty(info) && <div className="movie-detail hidden" ref={pageRef} >
+      {!isEmpty(info) && <div className="movie-detail" ref={pageRef} >
         <div className="movie-detail-top">
           <button className="btn-close" onClick={handleClose}>
             <svg viewBox="0 0 24 24" data-uia="previewModal-closebtn" role="button" aria-label="close" tabIndex="0"><path d="M12 10.586l7.293-7.293 1.414 1.414L13.414 12l7.293 7.293-1.414 1.414L12 13.414l-7.293 7.293-1.414-1.414L10.586 12 3.293 4.707l1.414-1.414L12 10.586z" fill="currentColor"></path></svg>
@@ -101,10 +104,10 @@ const  MovieDetail = ({ id, closeModal }) => {
           <div className="left-row">
             <p className="preference">XX% 適合妳</p>
             <p className="year">{info.date_in_theater ? info.date_in_theater.slice(0, 4) : ''}</p>
-            {info && info.chinese_description.trim().split('。').map(desc => {
+            {info.chinese_description ? info.chinese_description.trim().split('。').map((desc, index) => {
               if (!desc.length) return null
-              return <article>{`${desc}。`}</article>
-            })}
+              return <article key={index}>{`${desc}。`}</article>
+            }) :  <article />}
           </div>
           <div className="right-row">
             <p><span>導演：</span>{info.director_list || ''}</p>

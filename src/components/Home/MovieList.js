@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import Slider from 'react-slick';
-import MovieCard from './MovieCard'
+import { MovieCard } from '../Movie'
 import { Link } from 'react-router-dom';
 import { removeCards } from '../../utils'
 

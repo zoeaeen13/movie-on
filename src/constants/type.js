@@ -74,6 +74,10 @@ const MOVIE_TYPE = {
     name: '體育',
     type: 'sports',
   },
+  Biography: {
+    name: '傳記',
+    type: 'biography',
+  }
 }
 
 export default MOVIE_TYPE

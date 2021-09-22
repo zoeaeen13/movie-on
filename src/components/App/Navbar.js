@@ -11,7 +11,6 @@ const Navbar = ({ isTop }) => {
           首頁
         </Link>
         <Link to="/">電影分類</Link>
-        <Link to="/">熱門電影</Link>
         <Link to="/">我的片單</Link>
       </ul>
       <ButtonToolbar>

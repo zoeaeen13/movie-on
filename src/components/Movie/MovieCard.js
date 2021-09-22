@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import FloatingCard from './FloatingCard'
+import { FloatingCard } from '../Movie'
 import { removeCards, createModel } from '../../utils'
 
 const  MovieCard = ({ data }) => {

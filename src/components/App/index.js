@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import Home from '../../pages/Home';
+import SearchPage from '../../pages/Search';
 import Navbar from './Navbar';
 import { removeCards } from '../../utils'
 
@@ -22,6 +23,7 @@ const App = () => {
         <Navbar isTop={isTop}/>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/search" component={SearchPage} />
         </Switch>
       </BrowserRouter>
     </>
