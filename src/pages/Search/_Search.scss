@@ -17,15 +17,23 @@
 
 .browse-wrapper {
   position: relative;
-  margin-top: 60px;
+  // margin-top: 60px;
   width: 100%;
+  .flex-space-between {
+    margin-right: 7%;
+    @include flex-space-between();
+  }
   .movie-gallery {
     padding: 0 4% 0 6.5%;
+    margin-top: 12em;
   }
   .conditions-wrapper {
-    margin: 8em auto 0;
-    padding: 0 52px;
-    height: 100px;
+    position: fixed;
+    width: 100%;
+    background: #141414;
+    z-index: 5;
+    padding: 100px 52px 20px;
+    top: 0;
     .rs-slider {
       .rs-slider-bar {
         background-color: rgba(255, 255, 255, .2);
@@ -42,17 +50,31 @@
         }
       }
     }
-    .rs-dropdown {
+    .rs-dropdown, .rs-picker-cascader {
       color: white;
       border: 1px solid white;
       border-radius: 2px;
       margin: 0 10px;
     }
-    .rs-btn-subtle:focus, .rs-btn-subtle.rs-btn-focus, .rs-btn-subtle:hover {
+    .rs-picker-toggle {
+      background-color: rgba(#141414, 0.8) !important;
+      .rs-picker-toggle-value {
+        color: white;
+      }
+    }
+    .rs-btn-subtle:focus, .rs-btn-subtle.rs-btn-focus, .rs-btn-subtle:hover, .rs-picker-toggle {
       background-color: rgba(#141414, 0.8);
       color: white;
       border: none;
       border-radius: 2px;
+    }
+    .rs-picker-menu {
+      background-color: #141414 !important;
+      border: 1px solid rgba(#797979, 0.3);
+      color: white;
+      .rs-picker-cascader-menu-item {
+        color: white;
+      }
     }
     .rs-dropdown-open {
       .rs-dropdown-menu {
