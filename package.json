@@ -21,11 +21,14 @@
     "styled-components": "^5.3.1",
     "web-vitals": "^1.1.2"
   },
+  "homepage": "http://zoeaeen13.github.io/movie-on",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "husky": {
     "hooks": {
