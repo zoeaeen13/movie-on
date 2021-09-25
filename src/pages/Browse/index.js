@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { find, isEmpty } from 'lodash'
-import { Dropdown } from 'rsuite'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { find, debounce } from 'lodash'
+import { Dropdown, RangeSlider, Col } from 'rsuite'
 import Layout from '../../components/App/Layout'
 import { MovieCard } from '../../components/Movie'
-import useFetchMovies from '../../hooks/useFetchMovies'
 import { MOVIE_TYPE } from '../../constants'
 import { getMovies } from '../../api'
 import { removeCards } from '../../utils'
@@ -16,24 +15,58 @@ movieTypes.unshift({
   type: 'all',
 },)
 
-const initConditions = {
-  sort: 'rating_total_amount',
-  feature: '',
-  start_year: 1980,
-  end_year: 2021,
-}
+// 參考評分
+const rankingType = [
+  {
+    name: '參考',
+    value: 'rating_total_amount',
+  },
+  {
+    name: 'IMDB',
+    value: 'imdb_rating',
+  },
+  {
+    name: '豆瓣',
+    value: 'douban_rating',
+  },
+  {
+    name: ' 爛番茄',
+    value: 'audience_rating',
+  },
+]
+
+const startYear = 1980
+const endYear = 2021
 
 const Browse = () => {
   const [isBottom, setBottom] = useState(false)
-  const [conditions, setConditions] = useState(initConditions)
   const [loading, setLoading] = useState(false)
   const [movies, setMovies] = useState([])
   const bottomRef = useRef(null)
+  const [year, setYear] = useState([startYear, endYear])
+  const [conditions, setConditions] = useState({
+    sort: 'rating_total_amount',
+    feature: '',
+    start_year: startYear,
+    end_year: endYear,
+  })
 
-  const handleTypeSelect = (value) => {
-    const typeId = find(movieTypes, {type: value}).id
-    setConditions({...conditions, feature: typeId})
+  const handleConditionChange = (type, value) => {
+    setConditions({...conditions, [type]: value})
   }
+
+  const handleYearChange = ([start_year, end_year]) => {
+    setConditions({
+      ...conditions,
+      start_year,
+      end_year,
+    })
+  }
+
+  const debouncedChangeHandler = useCallback(
+    debounce(handleYearChange, 500)
+  , [])
+
 
   const fetchMovies = async (start) => {
     setLoading(true)
@@ -73,16 +106,41 @@ const Browse = () => {
   }, [])
 
   return (
-    <Layout className={`search-wrapper ${loading && 'loading'}`}>
-      <div className="sort-wrapper">
-        <Dropdown
-          title={find(movieTypes, {id: conditions.feature}).name}
-          activeKey={find(movieTypes, {id: conditions.feature}).type}
-          onSelect={handleTypeSelect}>
-          {movieTypes.map(({ id, name, type }, index) => {
-            return (<Dropdown.Item key={id+index} eventKey={type} children={name} />)
-          })}
-        </Dropdown>
+    <Layout className={`browse-wrapper ${loading && 'loading'}`}>
+      <div className="conditions-wrapper">
+        <Col md={2}>
+          <div style={{ height: 400, position: 'absolute' }}>
+            <RangeSlider
+              defaultValue={[1980, 2021]}
+              min={1980}
+              max={2021}
+              graduated
+              vertical
+              renderMark={mark => {
+                if (mark % 5 === 0) return <span>{mark}</span>
+              }}
+              onChange={debouncedChangeHandler}
+            />
+          </div>
+        </Col>
+        <div className="flex-column">
+          <Dropdown
+            title={find(movieTypes, {id: conditions.feature}).name}
+            activeKey={conditions.feature}
+            onSelect={(value) => handleConditionChange('feature', find(movieTypes, {type: value}).id)}>
+            {movieTypes.map(({ id, name, type }, index) => {
+              return (<Dropdown.Item key={id+index} eventKey={type} children={name} />)
+            })}
+          </Dropdown>
+          <Dropdown
+            title={find(rankingType, {value: conditions.sort}).name}
+            activeKey={conditions.value}
+            onSelect={(value) => handleConditionChange('sort', value)}>
+            {rankingType.map(({ name, value }) => {
+              return (<Dropdown.Item key={value} eventKey={value} children={name} />)
+            })}
+          </Dropdown>
+        </div>
       </div>
       <div className="movie-gallery">
         {movies.map((data) => {
