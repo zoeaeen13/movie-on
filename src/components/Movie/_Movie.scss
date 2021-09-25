@@ -1,3 +1,12 @@
+.movie-gallery {
+  margin-bottom: 8em;
+  padding: 0 4%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
+  grid-gap: 5em 6px;
+  justify-content: center;
+}
 .movie-card {
   position: relative;
   width: 100%;
@@ -73,13 +82,13 @@
               color: #A8A8A8;
             }
             .imdb {
-              @include setBackgroundImg('../images/imdb.png');
+              @include setBackgroundImg('../../images/imdb.png');
             }
             .douban {
-              @include setBackgroundImg('../images/douban.jpeg');
+              @include setBackgroundImg('../../images/douban.jpeg');
             }
             .tomatoes {
-              @include setBackgroundImg('../images/tomatoes.jpeg');
+              @include setBackgroundImg('../../images/tomatoes.jpeg');
             }
           }
           .icon-button-wrap + .icon-button-wrap {
@@ -318,13 +327,13 @@
             color: #A8A8A8;
           }
           .imdb {
-            @include setBackgroundImg('../images/imdb.png');
+            @include setBackgroundImg('../../images/imdb.png');
           }
           .douban {
-            @include setBackgroundImg('../images/douban.jpeg');
+            @include setBackgroundImg('../../images/douban.jpeg');
           }
           .tomatoes {
-            @include setBackgroundImg('../images/tomatoes.jpeg');
+            @include setBackgroundImg('../../images/tomatoes.jpeg');
           }
         }
         .icon-button-wrap + .icon-button-wrap {

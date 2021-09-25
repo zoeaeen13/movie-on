@@ -1,0 +1,12 @@
+@import "./reset";
+@import "./colors";
+@import "./mixins";
+@import "./global";
+// pages
+@import '../../pages/Home/Home';
+@import '../../pages/Search/Search';
+
+// components
+@import "../../components/App/App";
+@import "../../components/Movie/Movie";
+

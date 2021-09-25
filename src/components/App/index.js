@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { Route, Switch } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
-import Home from '../../pages/Home';
+import React, { useState } from 'react'
+import { Route, Switch } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
+import Home from '../../pages/Home'
 import SearchPage from '../../pages/Search'
+import BrowsePage from '../../pages/Browse'
 import Navbar from './Navbar'
 import { removeCards } from '../../utils'
 
 const App = () => {
   const [isTop, setTop] = useState(true)
-  const [searchWord, setSearchWord] = useState('')
+  const [searchWord, setSearchWord] = useState('  ')
 
   // 滑動時移除卡片
   window.addEventListener('scroll', () => {
@@ -23,6 +24,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/search" render={props => <SearchPage {...props} searchWord={searchWord} />} />
+          <Route exact path="/browse" component={BrowsePage} />
         </Switch>
       </BrowserRouter>
     </>

@@ -4,7 +4,6 @@
 .search-wrapper {
   position: relative;
   margin-top: 60px;
-  margin-bottom: 3em;
   width: 100%;
   .search-hint {
     text-align: center;
@@ -14,14 +13,46 @@
       color: white;
     }
   }
-}
-
-.movie-gallery {
-  margin-bottom: 8em;
-  padding: 0 4%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
-  grid-gap: 3em 6px;
-  justify-content: center;
+  .sort-wrapper {
+    margin: 8em auto 0;
+    padding: 0 52px;
+    height: 100px;
+    .rs-dropdown {
+      color: white;
+      border: 1px solid white;
+      border-radius: 2px;
+    }
+    .rs-btn-subtle:focus, .rs-btn-subtle.rs-btn-focus, .rs-btn-subtle:hover {
+      background-color: rgba(#141414, 0.8);
+      color: white;
+      border: none;
+      border-radius: 2px;
+    }
+    .rs-dropdown-open {
+      .rs-dropdown-menu-active {
+        background-color: #141414;
+        border: 1px solid rgba(#797979, 0.3);
+        width: min-content;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 0;
+      }
+    }
+    .rs-dropdown-menu .rs-dropdown-item-content {
+      text-align: center;
+      padding: 8px 16px;
+      clear: both;
+      font-weight: normal;
+      line-height: 1.5;
+      color: white;
+      white-space: nowrap;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(#797979, 0.8);
+      }
+    }
+  }
+  .page-bottom {
+    height: 100px;
+  }
 }

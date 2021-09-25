@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { isEmpty } from 'lodash'
-import { InputGroup, Input, Button } from 'rsuite'
 import Search from '@rsuite/icons/Search'
 import { Link } from 'react-router-dom'
 import useRouter from '../../hooks/useRouter'
@@ -26,20 +25,20 @@ const Navbar = ({ isTop, setSearchWord }) => {
       <div>
         <Link className="logo" to="/" />
         <ul className="navbar-list" >
-          <Link className="active" to="/">
+          <Link to="/">
             首頁
           </Link>
-          <Link to="/">電影分類</Link>
-          <Link to="/">我的片單</Link>
+          <Link to="/browse">電影分類</Link>
+          <Link to="/myWatchlist">我的片單</Link>
         </ul>
       </div>
       <div>
-        <InputGroup className={`${isFocus && 'isFocus'}`}>
-          <Button>
+        <div className={`navbar-input-group ${isFocus && 'isFocus'}`}>
+          <button>
             <Search size="3em" style={{ color: 'white', fontSize: '22px' }} onClick={() => setInputFocus(true)} />
-          </Button>
-          <Input type="text" onKeyDown={handleKeyDown} />
-        </InputGroup>
+          </button>
+          <input type="text" onKeyDown={handleKeyDown} />
+        </div>
       </div>
     </nav>
   );
