@@ -1,0 +1,27 @@
+.search-wrapper, .search-wrapper * {
+  box-sizing: border-box;
+}
+.search-wrapper {
+  position: relative;
+  margin-top: 60px;
+  margin-bottom: 3em;
+  width: 100%;
+  .search-hint {
+    text-align: center;
+    margin: 8em auto 3em;
+    color: grey;
+    span {
+      color: white;
+    }
+  }
+}
+
+.movie-gallery {
+  margin-bottom: 8em;
+  padding: 0 4%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
+  grid-gap: 3em 6px;
+  justify-content: center;
+}

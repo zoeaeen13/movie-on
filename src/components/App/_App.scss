@@ -3,7 +3,9 @@ body {
   margin-bottom: 20vh;
 }
 .navbar {
+  @include flex-space-between();
   position: fixed;
+  box-sizing: border-box;
   top: 0;
   left: 0;
   width: 100%;
@@ -14,6 +16,9 @@ body {
   transition: ease all 1s;
   z-index: 10;
   padding: 0 52px;
+  & > div {
+    @include flex-align-items-center();
+  }
   .logo {
     width: 110px;
     text-decoration: none;
@@ -46,16 +51,51 @@ body {
         color: white;
       }
     }
+    button + button {
+      margin-left: 15px;
+    }
   }
-  .rs-btn-default {
-    background: transparent;
-    margin-right: 15px;
+  .rs-input-group {
+    @include flex-align-items-center();
+    background-color: transparent;
+    padding: 4px 8px 4px 4px;
+    border-radius: 7px;
+    transition-duration: 1s;
+    input {
+      height: 100%;
+      background: transparent;
+      color: #fffffe;
+      width: 1px;
+      transition-duration: 3s;
+    }
+    .rs-btn-default {
+      background: transparent;
+      max-height: 100%;
+      border-radius: 7px;
+      &:hover {
+        border: none;
+      }
+    }
   }
-  .rs-icon {
-    color: white;
+  .rs-input-group.isFocus {
+    @include flex-align-items-center();
+    background-color: rgba(#434343, 0.5);
+    input {
+      width: 100%;
+      animation: inputAnim 5s;
+    }
   }
 }
 .navbar.top {
   background-color: transparent;
   background-image: linear-gradient(to bottom, rgba(0,0,0,.7) 10%, rgba(0,0,0,0));
+  .rs-input-group.isFocus {
+    background-color: rgba(#141414, 0.5);
+    border: 1px solid rgba(white, 0.2);
+  }
+}
+
+@keyframes inputAnim {
+  0% { width: 1px; }
+  100% { width: 100%; }
 }

@@ -2,28 +2,27 @@ import React, { useState } from 'react';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import Home from '../../pages/Home';
-import SearchPage from '../../pages/Search';
-import Navbar from './Navbar';
+import SearchPage from '../../pages/Search'
+import Navbar from './Navbar'
 import { removeCards } from '../../utils'
 
 const App = () => {
   const [isTop, setTop] = useState(true)
-  window.addEventListener('scroll', () => {
-    // navbar background
-    const y = window.scrollY
-    setTop(y < 150)
+  const [searchWord, setSearchWord] = useState('')
 
-    // remove floating cards while scrolling
+  // 滑動時移除卡片
+  window.addEventListener('scroll', () => {
+    setTop(window.scrollY < 150)
     if (document.documentElement.scrollTop > 150) removeCards('.floating-card-wrapper')
   })
 
   return (
     <>
       <BrowserRouter>
-        <Navbar isTop={isTop}/>
+        <Navbar isTop={isTop} setSearchWord={setSearchWord}/>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/search" component={SearchPage} />
+          <Route exact path="/search" render={props => <SearchPage {...props} searchWord={searchWord} />} />
         </Switch>
       </BrowserRouter>
     </>

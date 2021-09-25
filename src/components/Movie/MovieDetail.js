@@ -74,7 +74,7 @@ const  MovieDetail = ({ id, closeModal }) => {
   }, [])
 
   return (
-    <div className="movie-detail-container">
+    <div className="modal movie-detail-container">
       <div onClick={() => handleClose()} className="black-background" />
       {/* <div onClick={() => handleClose()} className={`black-background black-background-animation`} /> */}
       {!isEmpty(info) && <div className="movie-detail" ref={pageRef} >

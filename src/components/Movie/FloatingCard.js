@@ -50,7 +50,7 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
 
   const { id, main_taiwan_name, main_original_name, imdb_rating, douban_rating, tomator_rating, img, url } = data
   return (
-    <div className="floating-card-wrapper" style={position}>
+    <div className="modal floating-card-wrapper" style={position}>
       <div className="floating-card hidden" style={size} onMouseLeave={onMouseLeave} ref={cardRef}>
         <div className="movie-card-info">
           {url ? <iframe

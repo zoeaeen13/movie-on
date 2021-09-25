@@ -7,7 +7,7 @@ const  MovieCard = ({ data }) => {
   const cardRef = useRef(null)
 
   const onMouseEnter = useCallback(() => {
-    removeCards('.floating-card-wrapper')
+    removeCards()
     setVisible(true)
   }, [])
 

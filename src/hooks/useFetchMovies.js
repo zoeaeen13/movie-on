@@ -5,12 +5,12 @@ export default function useFetchMovies(condition = {}) {
   const [movies, setMovies] = useState([])
   condition.sort = 'rating_total_amount'
 
-  const fetchPhoto = async () => {
+  const fetchMovies = async () => {
     const { data } = await getMovies(condition)
     setMovies(data)
   }
   useEffect(() => {
-    fetchPhoto()
+    fetchMovies()
   }, [])
 
   return [movies]

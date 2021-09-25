@@ -1,0 +1,392 @@
+.movie-card {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 156%;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+}
+.floating-card-wrapper {
+  position: fixed;
+  z-index: 10;
+  .floating-card {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-radius: 6px;
+    background: #181818;
+    transition: ease all 0.3s;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.75);
+    &.hidden {
+      opacity: 0;
+      transform: scale(.5);
+    }
+    .movie-card-info {
+      border-radius: 6px;
+      img, iframe {
+        width: 100%;
+        height: 200px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border: none;
+        object-fit: contain; // cover?
+      } 
+      .info-content {
+        padding: 16px;
+        color: white;
+        .buttons {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: flex-start;
+          align-content: center;
+          .icon-button-wrap {
+            display: flex;
+            align-items: center;
+            opacity: .6;
+            &:hover {
+              opacity: 1;
+              .button {
+                border-color: #fff;
+              }
+              .score {
+                color: #fffffe;
+              }
+            }
+            .button + p {
+              margin: 0;
+              margin-left: 4px;
+              font-size: 12px;
+              line-height: 1.5;
+              bottom: -50%;
+              color: #A8A8A8;
+            }
+            .imdb {
+              @include setBackgroundImg('../images/imdb.png');
+            }
+            .douban {
+              @include setBackgroundImg('../images/douban.jpeg');
+            }
+            .tomatoes {
+              @include setBackgroundImg('../images/tomatoes.jpeg');
+            }
+          }
+          .icon-button-wrap + .icon-button-wrap {
+            margin-left: 10px;
+          }
+          .button {
+            width: 30px;
+            height: 30px;
+            padding: 6px;
+            border-radius: 50%;
+            border: 2px solid #595959;
+            box-sizing: border-box;
+            cursor: pointer;
+            svg {
+              stroke-width: 4px;
+              fill: #181818;
+            }
+            &:hover {
+              border-color: #fff;
+            }
+          }
+          .play {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            width: 40px;
+            height: 40px;
+            padding: 8px;
+            border-color: transparent;
+            background-color: #fff;
+            &:hover {
+              border-color: transparent;
+              background-color: rgba(#fff, .4);
+            }
+          }
+        }
+        .content-top {
+          h4 {
+            @include subtitle_02();
+            overflow: hidden;
+            span {
+              @include body_03();
+              max-width: 80%;
+              color: #A8A8A8;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+          }
+          .preference {
+            margin: 0;
+            @include subtitle_04();
+            color: #46d369;
+          }
+        }
+        .tags {
+          color: #f5f5f5;
+          display: flex;
+          align-items: center;
+          margin: 12px 0 18px;
+          p {
+            margin: 0;
+            &:not(:first-child) {
+              &::before {
+                content: '•';
+                color: #646464;
+                margin: 0 4px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.movie-detail {
+  pointer-events: auto;
+  position: absolute;
+  margin: 10em 0;
+	top: 0;
+  left: 50%;
+  overflow: hidden;
+  background-color: #181818;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 60%;
+  height: min-content;
+  min-width: 850px;
+  z-index: 110;
+	transform: translate(-50%, -5%) scale(1);
+  &.hidden {
+    opacity: 0;
+    transform: scale(.5);
+  }
+  .movie-detail-top {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    .btn-close {
+      @include size(36px, 36px);
+      padding: 8px;
+      background-color: #181818;
+      border-radius: 50%;
+      position: absolute;
+      margin: 16px;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+      &:focus {
+        border: none;
+        outline: none;
+        opacity: .7;
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+        stroke: white;
+        stroke-width: 2px;
+        pointer-events: none;
+      }
+    }
+    .background-gradient {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top,#181818,transparent 50%);
+      pointer-events: none;
+    }
+    img, iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: contain; // cover?
+    } 
+    .info {
+      position: absolute;
+      bottom: 25%;
+      left: 4%;
+      width: 36%;
+      z-index: 10;
+      h3 {
+        color: #fff;
+        font-family: 'Noto Serif TC', serif;
+        font-size: 48px;
+        margin-bottom: 24px;
+        width: 130%;
+      }
+      .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        .button + .button {
+          margin-left: 12px;
+        }
+        .button {
+          width: 40px;
+          height: 40px;
+          padding: 8px;
+          border-radius: 50%;
+          border: 2px solid #595959;
+          box-sizing: border-box;
+          cursor: pointer;
+          svg {
+            stroke-width: 4px;
+            fill: #181818;
+            stroke: #fff;
+          }
+          &:hover {
+            border-color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .movie-detail-bottom {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 3em;
+    font-size: 16px;
+    line-height: 1.5;
+    .left-row {
+      max-width: 60%;
+      .preference {
+        display: inline-block;
+        color: #46d369;
+        margin-right: 16px;
+        @include subtitle_03();
+      }
+      .year {
+        display: inline-block;
+      }
+      article {
+        font-size: 16px;
+        opacity: .8;
+        margin-bottom: 10px;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+    .right-row {
+      margin: .5em;
+      padding-left: 2em;
+      word-break: break-word;
+      span {
+        margin-right: 10px;
+        color: #777777;
+      }
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        .icon-button-wrap {
+          display: flex;
+          align-items: center;
+          opacity: .6;
+          cursor: pointer;
+          &:hover {
+            opacity: 1;
+            .button {
+              border-color: #fff;
+            }
+            .score {
+              color: #fffffe;
+            }
+          }
+          .button + p {
+            margin: 0;
+            margin-left: 4px;
+            font-size: 12px;
+            line-height: 1.5;
+            bottom: -50%;
+            color: #A8A8A8;
+          }
+          .imdb {
+            @include setBackgroundImg('../images/imdb.png');
+          }
+          .douban {
+            @include setBackgroundImg('../images/douban.jpeg');
+          }
+          .tomatoes {
+            @include setBackgroundImg('../images/tomatoes.jpeg');
+          }
+        }
+        .icon-button-wrap + .icon-button-wrap {
+          margin-top: 10px;
+        }
+        .button {
+          width: 30px;
+          height: 30px;
+          padding: 6px;
+          border-radius: 50%;
+          border: 2px solid #595959;
+          box-sizing: border-box;
+          cursor: pointer;
+          svg {
+            stroke-width: 4px;
+            fill: #181818;
+          }
+          &:hover {
+            border-color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .movie-detail-recommend {
+    padding: 0 3em 3em;
+    h4 {
+      font-weight: 700;
+      font-size: 24px;
+      margin-top: 60px;
+      margin-bottom: 20px;
+    }
+    .list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1em;
+      align-items: stretch;
+      justify-items: stretch;
+    }
+  }
+  .recommend-card {
+    cursor: pointer;
+    background: #2F2F2F;
+    width: 100%;
+    &-img {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 60%;
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include size(100%, 100%);
+        object-fit: cover;
+      }
+    }
+    &-content {
+      padding: 20px 16px;
+      p {
+        @include subtitle_03();
+      }
+    }
+  }
+}

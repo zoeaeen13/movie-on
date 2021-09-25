@@ -6,7 +6,7 @@ const  RecommendCard = ({ data }) => {
   const { date_in_theater, main_taiwan_name, internal } = data
 
   const onClickCard = () => {
-    removeCards('.movie-detail-container')
+    removeCards()
     setTimeout(() => {
       createModel(<MovieDetail id={internal} />)
     }, 500)

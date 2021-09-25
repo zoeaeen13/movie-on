@@ -33,3 +33,4 @@ API.interceptors.response.use(function (response) {
 export const getMovies = (params) => API.get('/api/movie/', { params })
 export const getMovieDetail = (id) => API.get(`api/detail/${id}`)
 export const getRecommends = (id) => API.get(`api/movie/recommend?&id=${id}`)
+export const getMoviesByKeyword = (keyword) => API.get(`api/search/?query=${keyword}`)
