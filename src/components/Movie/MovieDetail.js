@@ -60,17 +60,6 @@ const  MovieDetail = ({ id, closeModal }) => {
   useEffect(() => {
     fetchMovieInfo()
     fetchRecommended()
-    // show
-    // const id = setTimeout(() => {
-    //   if (pageRef.current) {
-    //     pageRef.current.classList.remove('hidden')
-    //   }
-    // }, 500)
-    // setFirstTimer(id)
-    // return () => {
-    //   clearTimeout(firstTimeer)
-    //   clearTimeout(secondTimer)
-    // }
   }, [])
 
   return (
@@ -82,8 +71,8 @@ const  MovieDetail = ({ id, closeModal }) => {
           <button className="btn-close" onClick={handleClose}>
             <svg viewBox="0 0 24 24" data-uia="previewModal-closebtn" role="button" aria-label="close" tabIndex="0"><path d="M12 10.586l7.293-7.293 1.414 1.414L13.414 12l7.293 7.293-1.414 1.414L12 13.414l-7.293 7.293-1.414-1.414L10.586 12 3.293 4.707l1.414-1.414L12 10.586z" fill="currentColor"></path></svg>
           </button>
-          {info.url ? <iframe
-            src={`https://www.youtube.com/embed/${id}?rel=0&autoplay=1&mute=1&enablejsapi=1`}
+          {!isEmpty(info.video_id) ? <iframe
+            src={`https://www.youtube.com/embed/${info.video_id}?rel=0&autoplay=1&mute=1&enablejsapi=1`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           /> :  <img src={info.img}/>}

@@ -48,13 +48,13 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
   }, [])
   
 
-  const { id, main_taiwan_name, main_original_name, imdb_rating, douban_rating, tomator_rating, img, url } = data
+  const { id, main_taiwan_name, main_original_name, imdb_rating, douban_rating, tomator_rating, img, video_id } = data
   return (
     <div className="modal floating-card-wrapper" style={position}>
       <div className="floating-card hidden" style={size} onMouseLeave={onMouseLeave} ref={cardRef}>
         <div className="movie-card-info">
-          {url ? <iframe
-            src={`https://www.youtube.com/embed/${url}?rel=0&autoplay=1&mute=1&enablejsapi=1`}
+          {!isEmpty(video_id) ? <iframe
+            src={`https://www.youtube.com/embed/${video_id}?rel=0&autoplay=1&mute=1&enablejsapi=1`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           ></iframe> : <img src={img}/>}

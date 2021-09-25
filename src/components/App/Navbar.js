@@ -29,7 +29,7 @@ const Navbar = ({ isTop, setSearchWord }) => {
             首頁
           </Link>
           <Link to="/browse">電影分類</Link>
-          <Link to="/myWatchlist">我的片單</Link>
+          {/* <Link to="/myWatchlist">我的片單</Link> */}
         </ul>
       </div>
       <div>

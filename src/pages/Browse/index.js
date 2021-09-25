@@ -270,9 +270,9 @@ const Browse = () => {
         </div>
       </div>
       <div className="movie-gallery">
-        {movies.map((data) => {
+        {movies.map((data, index) => {
           return (
-            <MovieCard key={data.id} data={data} />
+            <MovieCard key={data.id+index} data={data} />
         )})}
       </div>
       <div className="page-bottom" ref={bottomRef} />
