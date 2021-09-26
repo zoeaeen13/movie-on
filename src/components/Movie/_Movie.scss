@@ -1,11 +1,10 @@
 .movie-gallery {
-  margin-bottom: 8em;
-  padding: 0 4%;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
   grid-gap: 5em 6px;
   justify-content: center;
+  padding: 0 4%;
 }
 .movie-card {
   position: relative;

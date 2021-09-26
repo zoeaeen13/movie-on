@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { intersection, isEmpty } from 'lodash'
 import { Route, Switch } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
 import Home from '../../pages/Home'
@@ -15,6 +16,14 @@ const App = () => {
   window.addEventListener('scroll', () => {
     setTop(window.scrollY < 150)
     if (document.documentElement.scrollTop > 150) removeCards('.floating-card-wrapper')
+  })
+
+
+  window.addEventListener('mouseover', (e) => {
+    const elementArr = ['search-wrapper', 'home-content-wrapper', 'movie-list-wrapper', 'home-banner', 'movie-gallery', 'conditions-wrapper']
+    if (!isEmpty(intersection(e.target.classList, elementArr))) {
+      removeCards()
+    }
   })
 
   return (

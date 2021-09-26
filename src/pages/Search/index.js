@@ -30,7 +30,7 @@ const Search = ({ searchWord }) => {
         <div className="movie-gallery">
           {movies.map((data) => {
             return (
-              <MovieCard key={data.id} data={data} />
+              <MovieCard key={data.main_taiwan_name} data={data} />
           )})}
         </div>
         </>

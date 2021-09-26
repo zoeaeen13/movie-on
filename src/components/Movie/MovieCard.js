@@ -6,7 +6,7 @@ const  MovieCard = ({ data }) => {
   const [visible, setVisible] = useState(false)
   const cardRef = useRef(null)
 
-  const onMouseEnter = useCallback(() => {
+  const showFloatingCard = useCallback(() => {
     removeCards()
     setVisible(true)
   }, [])
@@ -27,11 +27,11 @@ const  MovieCard = ({ data }) => {
   return (
     <div
       onMouseOut={() => setVisible(false)}
-      onMouseEnter={onMouseEnter}
+      onMouseEnter={showFloatingCard}
       className="movie-card"
       ref={cardRef}
     >
-      <img src={data.img} />
+      <img src={data.img} onMouseEnter={showFloatingCard} alt=""/>
     </div>
   )
 }

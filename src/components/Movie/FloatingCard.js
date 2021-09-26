@@ -62,7 +62,7 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
             
             <div className="content-top">
               <h4>{`${main_taiwan_name}  `}<span>{main_original_name}</span></h4>
-              <p className="preference">{`XX% 適合您`}</p>
+              {/* <p className="preference">{`XX% 適合您`}</p> */}
             </div>
             <div className="tags">
               {/* <p>哈哈哈</p>

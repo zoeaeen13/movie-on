@@ -69,7 +69,7 @@ export const MovieList = ({ title, movies }) => {
           <Slider {...settings} ref={sliderRef}>
             {movies.map((data) => {
               return (
-                <MovieCard key={data.id} data={data} />
+                <MovieCard key={data.main_taiwan_name} data={data} />
             )})}
           </Slider>
           <button className="btn-next" onClickCapture={() => {

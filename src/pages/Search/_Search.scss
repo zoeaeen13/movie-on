@@ -50,9 +50,11 @@
         }
       }
     }
+    .rs-dropdown {
+      border: 1px solid white;
+    }
     .rs-dropdown, .rs-picker-cascader {
       color: white;
-      border: 1px solid white;
       border-radius: 2px;
       margin: 0 10px;
     }
@@ -62,8 +64,12 @@
         color: white;
       }
     }
+    .rs-btn-subtle {
+      color: white;
+      font-weight: bold;
+    }
     .rs-btn-subtle:focus, .rs-btn-subtle.rs-btn-focus, .rs-btn-subtle:hover, .rs-picker-toggle {
-      background-color: rgba(#141414, 0.8);
+      background-color: rgba(#141414, 0.5);
       color: white;
       border: none;
       border-radius: 2px;
