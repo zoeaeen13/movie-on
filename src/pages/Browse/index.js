@@ -55,7 +55,7 @@ const Browse = () => {
     const { imdb_rating, douban_rating, tomato_rating } = conditions
     if (imdb_rating) value += `IMDB / ${imdb_rating} 分以上`
     if (douban_rating) value += `${isEmpty(value) ? '' : '、'}豆瓣 / ${douban_rating} 分以上`
-    if (tomato_rating) value += `${isEmpty(value) ? '' : '、'}爛番茄 / ${tomato_rating} 分以上`
+    if (tomato_rating) value += `${isEmpty(value) ? '' : '、'}爛番茄 / ${tomato_rating}0 分以上`
     return value
   }
 

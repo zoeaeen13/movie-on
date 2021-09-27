@@ -7,7 +7,7 @@
   height: 56vw;
   max-height: 100vh;
   z-index: 1;
-  background-image: url('https://news.agentm.tw/wp-content/uploads/COVER.png');
+  background-image: url('https://fictionhorizon.com/wp-content/uploads/2021/07/19072021_Dune_posteri_banner.jpg');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -33,6 +33,11 @@
       line-height: normal;
       width: 100%;
       font-size: 1.4vw;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
   }
   .buttons {

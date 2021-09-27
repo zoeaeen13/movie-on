@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { intersection, isEmpty } from 'lodash'
-import { Route, Switch } from 'react-router'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter, Switch, Route } from "react-router-dom";
 import Home from '../../pages/Home'
 import SearchPage from '../../pages/Search'
 import BrowsePage from '../../pages/Browse'
@@ -28,14 +27,14 @@ const App = () => {
 
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Navbar isTop={isTop} setSearchWord={setSearchWord}/>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/search" render={props => <SearchPage {...props} searchWord={searchWord} />} />
           <Route exact path="/browse" component={BrowsePage} />
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 };
