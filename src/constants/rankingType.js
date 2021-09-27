@@ -4,7 +4,7 @@ const RANKING_TYPE = [
     value: 'rating_total_amount',
   },
   {
-    name: 'IMDB',
+    name: 'IMDb',
     value: 'imdb_rating',
     color: '#DBA506',
   },
