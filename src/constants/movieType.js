@@ -55,7 +55,7 @@ const MOVIE_TYPE = {
     type: 'Science fiction',
   },
   Crime: {
-    id: 13,
+    id: 14,
     name: '犯罪',
     type: 'crime',
   },
