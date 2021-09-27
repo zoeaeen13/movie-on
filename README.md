@@ -18,7 +18,7 @@
 ---
 
 ### 使用技術
-- 以 React 搭配 React-router 建立棋盤遊戲，使用 funciton component 及 hook 管理狀態
+- 以 React 搭配 axios 建立，使用 funciton component 及 hook 管理狀態
 - 實作 Custom Hook 整理獲取電影的邏輯
 - 利用 Portal 方式動態渲染電影資訊
 
