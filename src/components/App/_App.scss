@@ -40,6 +40,7 @@ body {
       font-size: 12px;
       line-height: 14.5px;
       color: #e5e5e5;
+      opacity: .7;
       margin-left: 18px;
       text-decoration: none;
       transition: color .4s;
@@ -49,6 +50,7 @@ body {
       &.active {
         font-weight: bold;
         color: white;
+        opacity: 1;
       }
     }
     button + button {

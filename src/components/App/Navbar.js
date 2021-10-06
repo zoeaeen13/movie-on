@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { isEmpty } from 'lodash'
 import Search from '@rsuite/icons/Search'
 import { Link } from 'react-router-dom'
+import { useLocation } from "react-router";
 import useRouter from '../../hooks/useRouter'
+import { signInWithGoogle, logout } from "../../services/firebase";
+import { UserContext } from '../../providers/UserProvider';
 
 const Navbar = ({ isTop, setSearchWord }) => {
+  const location = useLocation();
+  const user = useContext(UserContext)
   const { changeRouter } = useRouter()
   const [isFocus, setInputFocus] = useState(false)
 
@@ -25,11 +30,9 @@ const Navbar = ({ isTop, setSearchWord }) => {
       <div>
         <Link className="logo" to="/" />
         <ul className="navbar-list" >
-          <Link to="/">
-            首頁
-          </Link>
-          <Link to="/browse">電影分類</Link>
-          {/* <Link to="/myWatchlist">我的片單</Link> */}
+          <Link to="/" className={`${location.pathname === '/' && 'active'}`}>首頁</Link>
+          <Link to="/browse" className={`${location.pathname === '/browse' && 'active'}`}>電影分類</Link>
+          {/* <Link to="/watch_list">我的片單</Link> */}
         </ul>
       </div>
       <div>
@@ -39,6 +42,8 @@ const Navbar = ({ isTop, setSearchWord }) => {
           </button>
           <input type="text" onKeyDown={handleKeyDown} />
         </div>
+        {!user && <button onClick={signInWithGoogle}>登入</button>}
+        {user && <button onClick={logout}>登出</button>}
       </div>
     </nav>
   );

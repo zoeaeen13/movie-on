@@ -6,18 +6,18 @@ import SearchPage from '../../pages/Search'
 import BrowsePage from '../../pages/Browse'
 import Navbar from './Navbar'
 import { removeCards } from '../../utils'
+import UserProvider from "../../providers/UserProvider";
 
 const App = () => {
   const [isTop, setTop] = useState(true)
-  const [searchWord, setSearchWord] = useState('  ')
+  const [searchWord, setSearchWord] = useState('')
 
-  // 滑動時移除卡片
+  // scroll 移除卡片
   window.addEventListener('scroll', () => {
     setTop(window.scrollY < 150)
     if (document.documentElement.scrollTop > 150) removeCards('.floating-card-wrapper')
   })
-
-
+  // hover 移除卡片
   window.addEventListener('mouseover', (e) => {
     const elementArr = ['search-wrapper', 'home-content-wrapper', 'movie-list-wrapper', 'home-banner', 'movie-gallery', 'conditions-wrapper']
     if (!isEmpty(intersection(e.target.classList, elementArr))) {
@@ -26,7 +26,7 @@ const App = () => {
   })
 
   return (
-    <>
+    <UserProvider>
       <HashRouter>
         <Navbar isTop={isTop} setSearchWord={setSearchWord}/>
         <Switch>
@@ -35,9 +35,8 @@ const App = () => {
           <Route exact path="/browse" component={BrowsePage} />
         </Switch>
       </HashRouter>
-    </>
-  );
-};
+    </UserProvider>
+  )
+}
 
-export default App;
-
+export default App
