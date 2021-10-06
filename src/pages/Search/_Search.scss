@@ -17,7 +17,6 @@
 
 .browse-wrapper {
   position: relative;
-  // margin-top: 60px;
   width: 100%;
   .flex-space-between {
     margin-right: 7%;
@@ -104,6 +103,15 @@
       &:hover {
         background-color: rgba(#797979, 0.8);
       }
+    }
+    .rs-radio-group {
+      border-color: transparent;
+    }
+    .rs-radio-inline {
+      border-radius: 7px;
+    }
+    .rs-radio-checked .rs-radio-checker > label {
+      color: white;
     }
   }
   .page-bottom {

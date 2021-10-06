@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { isEmpty, find, debounce } from 'lodash'
 import dayjs from 'dayjs'
-import { Dropdown, RangeSlider, Col, Cascader } from 'rsuite'
+import { Dropdown, RangeSlider, Col, Cascader, RadioGroup, Radio } from 'rsuite'
 import Layout from '../../components/App/Layout'
 import { MovieCard } from '../../components/Movie'
 import { MOVIE_TYPE, RANKING_TYPE, SCORE_OPTIONS } from '../../constants'
@@ -82,6 +82,10 @@ const Browse = () => {
     }
   }, [])
 
+  const renderRadioButtons = () => {
+
+  }
+
   return (
     <Layout className={`browse-wrapper ${loading && 'loading'}`}>
       <div className="conditions-wrapper">
@@ -110,15 +114,19 @@ const Browse = () => {
                 return (<Dropdown.Item key={type} eventKey={type} children={name} />)
               })}
             </Dropdown>
-            <Dropdown
-              style={{ backgroundColor: find(RANKING_TYPE, {value: conditions.sort}).color }}
-              title={find(RANKING_TYPE, {value: conditions.sort}).name}
-              activeKey={conditions.value}
-              onSelect={(value) => handleConditionChange('sort', value)}>
-              {RANKING_TYPE.map(({ name, value }) => {
-                return (<Dropdown.Item key={value} eventKey={value} children={name} />)
+            <RadioGroup
+              inline
+              name="radioList"
+              value={conditions.value}
+              appearance="picker"
+              onChange={value => {
+                handleConditionChange('sort', value)
+              }}
+            >
+              {RANKING_TYPE.map(({ name, value, color }) => {
+                return <Radio style={{ backgroundColor: `${(conditions.sort === value) ? color : ''}` }} key={value} value={value}>{name}</Radio>
               })}
-            </Dropdown>
+            </RadioGroup>
           </div>
           <Cascader
             data={SCORE_OPTIONS}
@@ -131,7 +139,6 @@ const Browse = () => {
                 delete conditions.imdb_rating
                 delete conditions.douban_rating
                 delete conditions.tomato_rating
-                // omit(conditions, ['imdb_rating', 'douban_rating', 'tomato_rating'])
               }
               fetchMovies()
             }}
