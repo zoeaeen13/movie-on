@@ -1,6 +1,8 @@
 body {
   background: #141414;
-  margin-bottom: 20vh;
+}
+.layout {
+  padding-bottom: 20vh;
 }
 .navbar {
   @include flex-space-between();

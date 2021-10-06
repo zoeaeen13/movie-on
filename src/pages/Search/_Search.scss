@@ -109,6 +109,9 @@
     }
     .rs-radio-inline {
       border-radius: 7px;
+      label {
+        padding: 3px 10px;
+      }
     }
     .rs-radio-checked .rs-radio-checker > label {
       color: white;

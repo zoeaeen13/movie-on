@@ -8,7 +8,7 @@ const Layout = ({ children, style, className }) => {
   }, [])
 
   return (
-    <div style={style} className={className}>{children}</div>
+    <div style={style} className={`layout ${className}`}>{children}</div>
   )
 }
 
