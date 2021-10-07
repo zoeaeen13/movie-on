@@ -41,7 +41,7 @@ const Navbar = ({ isTop, setSearchWord }) => {
           <button>
             <Search size="3em" style={{ color: 'white', fontSize: '22px' }} onClick={() => setInputFocus(true)} />
           </button>
-          <input type="text" onKeyDown={handleKeyDown} />
+          <input type="text" onKeyDown={handleKeyDown} autoComplete="off"/>
         </div>
         <Link className="navbar-icon" to={`${user ? '/profile' : 'login'}`}>
           <FaUserCircle />

@@ -45,7 +45,9 @@ const Browse = () => {
     const params = {...conditions}
     params.start = start ? start : 0
     console.log(params)
-    const { data } = await getMovies(params)
+    const response = await getMovies(params)
+    if (response.status !== 200) return console.log(response)
+    const { data } = response
     setMovies(start ? movies.concat(data) : data)
     setLoading(false)
   }

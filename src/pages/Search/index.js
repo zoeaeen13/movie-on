@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { isEmpty } from 'lodash'
+import { isEmpty, isArray } from 'lodash'
 import { MovieCard } from '../../components/Movie'
 import { getMoviesByKeyword } from '../../api'
 import useRouter from '../../hooks/useRouter'
@@ -14,7 +14,10 @@ const Search = ({ searchWord }) => {
 
     // fetch
     const fetchMovies = async (keyword) => {
-      const { data } = await getMoviesByKeyword(keyword)
+      const response = await getMoviesByKeyword(keyword)
+      if (response.status !== 200) return console.log(response)
+      const { data } = response
+      if (!isArray(data)) return
       setMovies(data)
     }
     fetchMovies(searchWord)

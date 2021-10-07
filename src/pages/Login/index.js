@@ -17,11 +17,11 @@ const LoginPage = () => {
           <section className="login card-front">
             <h3 className="login-title">Sign In</h3>
             <div className="login-group">
-              <input className="login-group-input" type="text" required="true"/>
+              <input className="login-group-input" type="text" required="true" autoComplete="off"/>
               <label className="login-group-label">帳號 Username</label>
             </div>
             <div className="login-group">
-              <input className="login-group-input" type="password" required="true" />
+              <input className="login-group-input" type="password" required="true" autoComplete="off"/>
               <label className="login-group-label">密碼 Password</label>
             </div>
             <button className="login-btn" type="button">登入</button>
@@ -31,15 +31,15 @@ const LoginPage = () => {
           <section className="register card-back">
             <h3 className="register-title">Sign Up</h3>
             <div className="register-group">
-              <input className="register-group-input" type="email" required="true"/>
+              <input className="register-group-input" type="email" required="true" autoComplete="off"/>
               <label className="register-group-label">註冊信箱 Email</label>
             </div>
             <div className="register-group">
-              <input className="register-group-input" type="text" required="true"/>
+              <input className="register-group-input" type="text" required="true" autoComplete="off"/>
               <label className="register-group-label">帳號 Username</label>
             </div>
             <div className="register-group">
-              <input className="register-group-input" type="password" required="true" />
+              <input className="register-group-input" type="password" required="true" autoComplete="off"/>
               <label className="register-group-label">密碼 Password</label>
             </div>
             <button className="register-btn" type="button">註冊</button>
