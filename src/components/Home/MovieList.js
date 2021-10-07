@@ -4,7 +4,6 @@ import { isEmpty } from 'lodash'
 import { MovieCard } from '../Movie'
 import { Link } from 'react-router-dom'
 import { removeCards } from '../../utils'
-import PropTypes from 'prop-types'
 
 const settings = {
   dots: false,
@@ -56,7 +55,7 @@ const settings = {
   ],
 }
 
-const MovieList = ({ title, movies }) => {
+const MovieList = ({ title, movies = [] }) => {
   const sliderRef = useRef(null) 
 
   return (
@@ -83,10 +82,5 @@ const MovieList = ({ title, movies }) => {
     </div>
   );
 };
-
-MovieList.propTypes = {
-  title: PropTypes.string,
-  movies: PropTypes.array,
-}
 
 export { MovieList }

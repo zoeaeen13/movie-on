@@ -7,7 +7,6 @@ import { useLocation } from "react-router";
 import useRouter from '../../hooks/useRouter'
 import { logout } from '../../services/firebase'
 import { UserContext } from '../../providers/UserProvider';
-import PropTypes from 'prop-types'
 
 const Navbar = ({ isTop, setSearchWord }) => {
   const location = useLocation();
@@ -49,12 +48,7 @@ const Navbar = ({ isTop, setSearchWord }) => {
         </Link>
       </div>
     </nav>
-  );
-};
-
-Navbar.propTypes = {
-  isTop: PropTypes.bool,
-  setSearchWord: PropTypes.string,
+  )
 }
 
 export default Navbar;
