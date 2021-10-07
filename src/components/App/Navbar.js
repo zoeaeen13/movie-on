@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
+import { FaUserCircle } from 'react-icons/fa';
 import { isEmpty } from 'lodash'
 import Search from '@rsuite/icons/Search'
 import { Link } from 'react-router-dom'
 import { useLocation } from "react-router";
 import useRouter from '../../hooks/useRouter'
-import { signInWithGoogle, logout } from "../../services/firebase";
 import { UserContext } from '../../providers/UserProvider';
 
 const Navbar = ({ isTop, setSearchWord }) => {
@@ -42,8 +42,9 @@ const Navbar = ({ isTop, setSearchWord }) => {
           </button>
           <input type="text" onKeyDown={handleKeyDown} />
         </div>
-        {!user && <button onClick={signInWithGoogle}>登入</button>}
-        {user && <button onClick={logout}>登出</button>}
+        <Link className="navbar-icon" to={`${user ? '/profile' : 'login'}`}>
+          <FaUserCircle />
+        </Link>
       </div>
     </nav>
   );

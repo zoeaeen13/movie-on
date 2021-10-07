@@ -82,11 +82,22 @@ body {
     }
   }
   &-input-group.isFocus {
+    margin-right: 20px;
     @include flex-align-items-center();
-    background-color: rgba(#434343, 0.5);
+    background-color: rgba(#434343, 0.7);
     input {
       width: 100%;
       animation: inputAnim 5s;
+    }
+  }
+  .navbar-icon {
+    svg {
+      color: #fff;
+      width: 24px;
+      height: 24px;
+      &:hover {
+        color: #b3b3b3;
+      }
     }
   }
 }

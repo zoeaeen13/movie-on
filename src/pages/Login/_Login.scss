@@ -2,26 +2,27 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  // &::before {
-  //   content: url(../../images/login-background.jpeg);
-  //   width: 100vw;
-  //   height: 100vh;
-  //   filter: brightness(1.75);
-  //   background-repeat: no-repeat;
-  //   background-position: center center;
-  //   background-size: cover;
-  // }
   background-image: url(../../images/login-background.jpeg);
   background-repeat: no-repeat;
   background-position: center center;
   filter: brightness(1.5);
   background-size:cover;
+  .rs-btn-toggle {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    background-color: rgba(#3e3e3e, .5);
+    &:hover {
+      background-color: rgba(#e50914, .3);
+    }
+  }
+  .rs-btn-toggle::after {
+    display: none;
+  }
 }
-.login {
+.login, .register {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
   display: flex;
   flex-direction: column;
   background: rgba(000, 000, 000, 0.5);
@@ -31,6 +32,7 @@
   padding: 40px 58px 30px;
   filter: brightness(.9);
   &-title {
+    display: inline-block;
     margin-bottom: 20px;
     font-size: 2.2rem;
     font-weight: 600;
@@ -45,13 +47,12 @@
     &-label {
       position: absolute;
       z-index: 150;
-      color: #b3b3b3;
-      font-size: 0.9rem;
-      top: 30px;
+      color: #656565;
+      font-size: .9rem;
+      top: 12px;
       left: 18px;
       transition: all 300ms ease-in;
     }
-
     &-input {
       width: 100%;
       position: relative;
@@ -65,9 +66,8 @@
       color: $White;
       line-height: 50px;
       padding: 12px 18px 0;
-
-      &:focus + .login-group-label {
-        top: 15px;
+      &:focus + .login-group-label, &:focus + .register-group-label  {
+        top: 8px;
         font-size: 0.7rem;
       }
     }
@@ -88,14 +88,40 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    a {
+    button {
       opacity: 1;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: #b3b3b3;
+      background: transparent;
       text-decoration: none;
       &:hover {
         text-decoration: underline;
       }
     }
   }
+}
+
+// 翻牌效果
+.centered-wrap {
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+.card {
+  position:relative;
+  width: 420px;
+  height: 500px;
+  transform-style: preserve-3d; /*preserve the back when fliping*/
+  transition: 0.5s all ease;  
+}
+.card.card-flip {
+  transform: rotateY(180deg);
+}
+.card-front {
+  backface-visibility: hidden; /*hide backface*/
+}
+.card-back {
+  backface-visibility: hidden;
+  transform: rotateY(180deg); /*flip card-back behind card-front*/
 }
