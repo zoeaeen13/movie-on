@@ -1,65 +1,67 @@
-import React, { useRef } from 'react';
-import Slider from 'react-slick';
+import React, { useRef } from 'react'
+import Slider from 'react-slick'
+import { isEmpty } from 'lodash'
 import { MovieCard } from '../Movie'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import { removeCards } from '../../utils'
+import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prop-types
-export const MovieList = ({ title, movies }) => {
-  const sliderRef = useRef(null)
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 7,
-    slidesToScroll: 7,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1400,
-        settings: {
-          slidesToShow: 8,
-          slidesToScroll: 8,
-          infinite: true,
-        },
+const settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 7,
+  slidesToScroll: 7,
+  initialSlide: 0,
+  responsive: [
+    {
+      breakpoint: 1400,
+      settings: {
+        slidesToShow: 8,
+        slidesToScroll: 8,
+        infinite: true,
       },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 6,
-          slidesToScroll: 6,
-          infinite: true,
-        },
+    },
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 6,
+        slidesToScroll: 6,
+        infinite: true,
       },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 6,
-          slidesToScroll: 6,
-          infinite: true,
-        },
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        slidesToShow: 6,
+        slidesToScroll: 6,
+        infinite: true,
       },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          infinite: true,
-        },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        infinite: true,
       },
-      {
-        breakpoint: 576,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-        },
+    },
+    {
+      breakpoint: 576,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
       },
-    ],
-  }  
+    },
+  ],
+}
+
+const MovieList = ({ title, movies }) => {
+  const sliderRef = useRef(null) 
 
   return (
     <div className="movie-list-wrapper">
-      <Link className="movie-list-title" to="/">{title}</Link>
+      {isEmpty(movies) ? <div /> : (<><Link className="movie-list-title" to="/">{title}</Link>
       <div className="movie-list">
         <div className="slider-container">
           <button className="btn-previous" onClickCapture={() => {
@@ -77,7 +79,14 @@ export const MovieList = ({ title, movies }) => {
             sliderRef.current?.slickNext()
           }} />
         </div>
-      </div>
+      </div></>)}
     </div>
   );
 };
+
+MovieList.propTypes = {
+  title: PropTypes.string,
+  movies: PropTypes.array,
+}
+
+export { MovieList }
