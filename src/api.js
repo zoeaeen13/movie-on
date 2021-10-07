@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const API = axios.create({
-    baseURL: 'https://movieon.tw',
+    baseURL: process.env.REACT_APP_API,
     headers: {
         'Content-Type': 'application/json',
     },
