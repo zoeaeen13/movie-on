@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { intersection, isEmpty } from 'lodash'
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from '../../pages/Home'
 import LoginPage from '../../pages/Login'
 import ProfilePage from '../../pages/Profile'
@@ -29,7 +29,7 @@ const App = () => {
 
   return (
     <UserProvider>
-      <HashRouter>
+      <BrowserRouter>
         <Navbar isTop={isTop} setSearchWord={setSearchWord}/>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -38,7 +38,7 @@ const App = () => {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/profile" component={ProfilePage} />
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
     </UserProvider>
   )
 }
