@@ -21,7 +21,7 @@ const App = () => {
   })
   // hover 移除卡片
   window.addEventListener('mouseover', (e) => {
-    const elementArr = ['search-wrapper', 'home-content-wrapper', 'movie-list-wrapper', 'home-banner', 'movie-gallery', 'conditions-wrapper']
+    const elementArr = ['nav-bar', 'search-wrapper', 'home-content-wrapper', 'movie-list-wrapper', 'home-banner', 'movie-gallery', 'conditions-wrapper']
     if (!isEmpty(intersection(e.target.classList, elementArr))) {
       removeCards()
     }

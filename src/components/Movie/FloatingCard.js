@@ -6,14 +6,20 @@ import { createModel } from '../../utils'
 
 const handleStyle = ({ width, height, top, left }) => {
   const { availWidth, availHeight } = window.screen
+  // 卡片寬高
   const newWidth = width*1.7 > 350 ? 350 : width*1.7
   const newHeight = newWidth*1.08
+  // 卡片距離
   let newTop = top - ((newHeight - height) / 2)
   let newLeft = left - ((newWidth - width) / 2)
-  if(top + newHeight > availHeight) newTop =  availHeight - newHeight
+  if (newTop < 60) newTop = 60
+  if ((newHeight + newTop) > availHeight) newTop = availHeight - newHeight
   if(left + newWidth > availWidth) newLeft =  availWidth*0.96 - newWidth
   if (left - 10 <= availWidth*0.04) newLeft = availWidth*0.04
-  return { position: { top: Math.floor(newTop), left: Math.floor(newLeft) }, size: { width: Math.floor(newWidth), height: 'auto' }}
+  return {
+    position: { top: newTop, left: newLeft },
+    size: { width: newWidth, height: 'auto' }
+  }
 }
 
 const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) => {
@@ -24,8 +30,8 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
 
   const onMouseLeave = () => {
     if (cardRef) {
-      cardRef.current.classList.add('hidden')
-      const id = setTimeout(() => closeModal(), 300)
+      cardRef.current.classList.add('disappear')
+      const id = setTimeout(() => closeModal(), 500)
       setSecondTimer(id)
     }
     setVisible(false)
@@ -37,8 +43,8 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
 
   useEffect(() => {
     const id = setTimeout(() => {
-      cardRef.current.classList.remove('hidden')
-    }, 500)
+      cardRef.current.classList.remove('disappear')
+    }, 300)
     setFirstTimer(id)
 
     return () => {
@@ -51,7 +57,7 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
   const { id, main_taiwan_name, main_original_name, imdb_rating, douban_rating, tomator_rating, img, video_id } = data
   return (
     <div className="modal floating-card-wrapper" style={position}>
-      <div className="floating-card hidden" style={size} onMouseLeave={onMouseLeave} ref={cardRef}>
+      <div className="floating-card disappear" onMouseLeave={onMouseLeave} style={size} ref={cardRef}>
         <div className="movie-card-info">
           {!isEmpty(video_id) ? <iframe
             src={`https://www.youtube.com/embed/${video_id}?rel=0&autoplay=1&mute=1&enablejsapi=1`}

@@ -16,19 +16,18 @@ const handleType = (str) => {
 }
 
 const  MovieDetail = ({ id, closeModal }) => {
-  // const [firstTimeer, setFirstTimer] = useState(null)
-  // const [secondTimer, setSecondTimer] = useState(null)
+  const [firstTimeer, setFirstTimer] = useState(null)
+  const [secondTimer, setSecondTimer] = useState(null)
   const [info, setInfo] = useState({})
   const [recommend, setRecommend] = useState([])
   const pageRef = useRef(null)
 
   const handleClose = useCallback(() => {
-    closeModal()
-    // if (pageRef.current) {
-    //   pageRef.current.classList.add('hidden')
-    //   const id = setTimeout(() => closeModal(), 500)
-    //   setSecondTimer(id)
-    // }
+    if (pageRef.current) {
+      pageRef.current.classList.add('disappear')
+      const id = setTimeout(() => closeModal(), 500)
+      setSecondTimer(id)
+    }
 	}, [])
 
   const onButtonClick = (type) => {
@@ -45,28 +44,38 @@ const  MovieDetail = ({ id, closeModal }) => {
     }
   }
 
-  const fetchMovieInfo = async() => {
+  const fetchMovieInfo = useCallback(async() => {
     const response = await getMovieDetail(id)
     if (response.status !== 200) return closeModal()
     setInfo(response.data[0])
-    window.scrollTo({ top: 0 })
-  }
+    const timerId = setTimeout(() => {
+      pageRef.current.classList.remove('disappear')
+    }, 500)
+    setFirstTimer(timerId)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
 
   const fetchRecommended = async() => {
-    const { data } = await getRecommends(id)
-    setRecommend(data)
+    const response = await getRecommends(id)
+    if (response.status !== 200) return
+    setRecommend(response.data)
   }
 
   useEffect(() => {
     fetchMovieInfo()
     fetchRecommended()
+
+    return () => {
+      clearTimeout(firstTimeer)
+      clearTimeout(secondTimer)
+    }
   }, [])
 
   return (
     <div className="modal movie-detail-container">
       <div onClick={() => handleClose()} className="black-background" />
       {/* <div onClick={() => handleClose()} className={`black-background black-background-animation`} /> */}
-      {!isEmpty(info) && <div className="movie-detail" ref={pageRef} >
+      {!isEmpty(info) && <div className="movie-detail disappear" ref={pageRef} >
         <div className="movie-detail-top">
           <button className="btn-close" onClick={handleClose}>
             <svg viewBox="0 0 24 24" data-uia="previewModal-closebtn" role="button" aria-label="close" tabIndex="0"><path d="M12 10.586l7.293-7.293 1.414 1.414L13.414 12l7.293 7.293-1.414 1.414L12 13.414l-7.293 7.293-1.414-1.414L10.586 12 3.293 4.707l1.414-1.414L12 10.586z" fill="currentColor"></path></svg>
