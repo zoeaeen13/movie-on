@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { getMovieDetail, getRecommends } from '../../api'
 import RecommendCard from './RecommendCard'
 import { MOVIE_TYPE } from '../../constants'
+import { gaEvent } from '../../services/GA'
 
 const handleType = (str) => {
   const typeArr = str.split(',')
@@ -22,16 +23,18 @@ const  MovieDetail = ({ id, closeModal }) => {
   const [recommend, setRecommend] = useState([])
   const pageRef = useRef(null)
 
-  const handleClose = useCallback(() => {
+  const handleClose = () => {
     if (pageRef.current) {
       pageRef.current.classList.add('disappear')
       const id = setTimeout(() => closeModal(), 500)
       setSecondTimer(id)
     }
-	}, [])
+    gaEvent('movieDetail', 'click to close movie detail', { value: id })
+	}
 
-  const onButtonClick = (type) => {
+  const onRankingClick = (type) => {
     const { rotten_tomato_id, imdb_id, douban_id } = info
+    gaEvent('movieDetail', 'click movie-ranking website', { value: id, label: type })
     switch (type) {
       case 'imdb':
         return window.open(`https://www.imdb.com/title/${imdb_id}`, "_blank")
@@ -42,6 +45,14 @@ const  MovieDetail = ({ id, closeModal }) => {
       default:
         break;
     }
+  }
+
+  const onLikeClick = () => {
+    gaEvent('movieDetail', 'click to like movie', { value: id })
+  }
+
+  const onCollectClick = () => {
+    gaEvent('movieDetail', 'click to collect movie', { value: id })
   }
 
   const fetchMovieInfo = useCallback(async() => {
@@ -73,8 +84,7 @@ const  MovieDetail = ({ id, closeModal }) => {
 
   return (
     <div className="modal movie-detail-container">
-      <div onClick={() => handleClose()} className="black-background" />
-      {/* <div onClick={() => handleClose()} className={`black-background black-background-animation`} /> */}
+      <div onClick={handleClose} className="black-background" />
       {!isEmpty(info) && <div className="movie-detail disappear" ref={pageRef} >
         <div className="movie-detail-top">
           <button className="btn-close" onClick={handleClose}>
@@ -89,10 +99,10 @@ const  MovieDetail = ({ id, closeModal }) => {
           <div className="info">
             <h3>{info.main_taiwan_name}</h3>
             <div className="buttons">
-              <div className="button plus">
+              <div className="button plus" onClick={onLikeClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M32 16v32m16-16H16"></path></svg>
               </div>
-              <div className="button play">
+              <div className="button play" onClick={onCollectClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M54 35h2a4 4 0 1 0 0-8H34a81 81 0 0 0 2-18 4 4 0 0 0-8 0s-4 22-18 22H4v24h10c4 0 12 4 16 4h20a4 4 0 0 0 0-8h2a4 4 0 0 0 0-8h2a4 4 0 0 0 0-8"></path></svg>
               </div>
             </div>
@@ -112,19 +122,19 @@ const  MovieDetail = ({ id, closeModal }) => {
             <p><span>演員：</span>{info.actor_list.replaceAll(',', '、')}</p>
             <p><span>類型：</span>{handleType(info.feature_list)}</p>
             <div className="buttons">
-              {info.rating && <div className="icon-button-wrap" onClick={() => onButtonClick('imdb')}>
+              {info.rating && <div className="icon-button-wrap" onClick={() => onRankingClick('imdb')}>
                 <div className="button imdb"/>
                 <p className="score">{`${info.rating}（共 ${info.rating_count} 評分）`}</p>
               </div>}
-              {info.avg_rating && <div className="icon-button-wrap" onClick={() => onButtonClick('douban')}>
+              {info.avg_rating && <div className="icon-button-wrap" onClick={() => onRankingClick('douban')}>
                 <div className="button douban"/>
                 <p className="score">{`${info.avg_rating}（共 ${info.total_rating_amount} 評分）`}</p>
               </div>}
-              {!isEmpty(info.audience_rating) && <div className="icon-button-wrap" onClick={() => onButtonClick('tomatoes')}>
+              {!isEmpty(info.audience_rating) && <div className="icon-button-wrap" onClick={() => onRankingClick('tomatoes')}>
                 <div className="button tomatoes"/>
                 <p className="score">{`${info.audience_rating} 觀眾評分（共 ${info.audience_rating_amount} 評分）`}</p>
               </div>}
-              {!isEmpty(info.tomator_rating) && <div className="icon-button-wrap" onClick={() => onButtonClick('tomatoes')}>
+              {!isEmpty(info.tomator_rating) && <div className="icon-button-wrap" onClick={() => onRankingClick('tomatoes')}>
                 <div className="button tomatoes"/>
                 <p className="score">{`${info.tomator_rating} 影評評分（共 ${info.tomator_rating_amount} 評分）`}</p>
               </div>}

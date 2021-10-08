@@ -17,4 +17,4 @@ const Layout = ({ children, style, className }) => {
   )
 }
 
-export default Layout
+export default React.memo(Layout)

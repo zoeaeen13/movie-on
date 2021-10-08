@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { isEmpty } from 'lodash'
 import { FloatingCard } from '../Movie'
 import { removeCards, createModel } from '../../utils'
+import { gaEvent } from '../../services/GA'
 
 const  MovieCard = ({ data }) => {
   const [visible, setVisible] = useState(false)
@@ -9,6 +11,8 @@ const  MovieCard = ({ data }) => {
   const showFloatingCard = useCallback(() => {
     removeCards()
     setVisible(true)
+    const pathname = window.location.pathname.replace('/', '')
+    gaEvent(isEmpty(pathname) ? 'home' : pathname, 'Hover a movie card', { value: data.internal })
   }, [])
 
   useEffect(() => {

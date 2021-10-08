@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { isEmpty } from 'lodash'
 import MovieDetail from './MovieDetail'
 import { createModel } from '../../utils'
-
+import { gaEvent } from '../../services/GA'
 
 const handleStyle = ({ width, height, top, left }) => {
   const { availWidth, availHeight } = window.screen
@@ -22,7 +22,21 @@ const handleStyle = ({ width, height, top, left }) => {
   }
 }
 
-const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) => {
+const RankingIcon = React.memo(({ type, id, rating }) => {
+  const onRatingClick = useCallback(() => {
+    const pathname = window.location.pathname.replace('/', '')
+    gaEvent(isEmpty(pathname) ? 'home' : pathname, 'Click movie-ranking type', { value: id, label: type })
+  }, [])
+
+  return (
+    <div className="icon-button-wrap" onClick={onRatingClick}>
+      <div className={`button ${type}`} />
+      <p className="score">{rating}</p>
+    </div>
+  )
+})
+
+const FloatingCard = ({ data, clintRect, closeModal, setVisible }) => {
   const [firstTimeer, setFirstTimer] = useState(null)
   const [secondTimer, setSecondTimer] = useState(null)
   const cardRef = useRef(null)
@@ -38,7 +52,10 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
   }
 
   const onInfoClick = () => {
-    createModel(<MovieDetail id={data.internal} />)
+    const id = data.internal
+    const pathname = window.location.pathname.replace('/', '')
+    gaEvent(isEmpty(pathname) ? 'home' : pathname, 'Click to see movie detail', { value: id })
+    createModel(<MovieDetail id={id} />)
   }
 
   useEffect(() => {
@@ -54,7 +71,7 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
   }, [])
   
 
-  const { id, main_taiwan_name, main_original_name, imdb_rating, douban_rating, tomator_rating, img, video_id } = data
+  const { id, internal, main_taiwan_name, main_original_name, imdb_rating, douban_rating, tomator_rating, img, video_id } = data
   return (
     <div className="modal floating-card-wrapper" style={position}>
       <div className="floating-card disappear" onMouseLeave={onMouseLeave} style={size} ref={cardRef}>
@@ -65,7 +82,6 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           ></iframe> : <img src={img}/>}
           <div className="info-content">
-            
             <div className="content-top">
               <h4>{`${main_taiwan_name}  `}<span>{main_original_name}</span></h4>
               {/* <p className="preference">{`XX% 適合您`}</p> */}
@@ -76,18 +92,9 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
               <p>嘎嘎嘎</p> */}
             </div>
             <div className="buttons">
-              {!isEmpty(imdb_rating) && <div className="icon-button-wrap">
-                <div className="button imdb"/>
-                <p className="score">{imdb_rating}</p>
-              </div>}
-              {!isEmpty(douban_rating) && <div className="icon-button-wrap">
-                <div className="button douban"/>
-                <p className="score">{douban_rating}</p>
-              </div>}
-              {!isEmpty(tomator_rating) && <div className="icon-button-wrap">
-                <div className="button tomatoes"/>
-                <p className="score">{tomator_rating}</p>
-              </div>}
+              {!isEmpty(imdb_rating) && <RankingIcon type={'imdb'} id={internal} rating={imdb_rating} />}
+              {!isEmpty(douban_rating) && <RankingIcon type={'douban'} id={internal} rating={douban_rating} />}
+              {!isEmpty(tomator_rating) && <RankingIcon type={'tomatoes'} id={internal} rating={tomator_rating} />}
               <div className="button play" onClick={() => onInfoClick(id)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M6 2l52 30L6 62V2z"></path></svg>
               </div>
@@ -97,7 +104,7 @@ const FloatingCard = React.memo(({ data, clintRect, closeModal, setVisible }) =>
       </div>
     </div> 
   )
-})
+}
 
 
-export default FloatingCard
+export default React.memo(FloatingCard)

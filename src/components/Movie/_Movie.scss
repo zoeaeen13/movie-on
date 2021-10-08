@@ -379,8 +379,14 @@
     }
   }
   .recommend-card {
+    position: relative;
     cursor: pointer;
     background: #2F2F2F;
+    border-radius: 3px;
+    box-sizing: border-box;
+    &:hover.overlay {
+      border-color: #00e054;
+    }
     width: 100%;
     &-img {
       position: relative;
@@ -401,5 +407,14 @@
         @include subtitle_03();
       }
     }
+  }
+  .recommend-card.overlay {
+    border: 3px solid transparent;
+    bottom: 0;
+    display: block;
+    left: 0;
+    right: 0;
+    top: 0;
+    transition: border .1s linear;
   }
 }

@@ -5,7 +5,7 @@ import Search from '@rsuite/icons/Search'
 import { Link } from 'react-router-dom'
 import { useLocation } from "react-router";
 import useRouter from '../../hooks/useRouter'
-import { logout } from '../../services/firebase'
+import { gaEvent } from '../../services/GA'
 import { UserContext } from '../../providers/UserProvider';
 
 const Navbar = ({ isTop, setSearchWord }) => {
@@ -20,6 +20,7 @@ const Navbar = ({ isTop, setSearchWord }) => {
         setInputFocus(false)
         changeRouter('/')
       } else {
+        gaEvent('navbar', 'enter to search movie', { value: e.target.value })
         setSearchWord(e.target.value)
         changeRouter('/search')
       }
@@ -39,11 +40,14 @@ const Navbar = ({ isTop, setSearchWord }) => {
       <div>
         <div className={`navbar-input-group ${isFocus && 'isFocus'}`}>
           <button>
-            <Search size="3em" style={{ color: 'white', fontSize: '22px' }} onClick={() => setInputFocus(true)} />
+            <Search size="3em" style={{ color: 'white', fontSize: '22px' }} onClick={() => {
+              gaEvent('navbar', 'click to search movie', { label: 'search-icon' })
+              setInputFocus(true)
+            }} />
           </button>
           <input type="text" onKeyDown={handleKeyDown} autoComplete="off"/>
         </div>
-        <Link className="navbar-icon" to={`${user ? '/profile' : 'login'}`}>
+        <Link className="navbar-icon" to={`${user ? '/profile' : 'login'}`} onClick={() => gaEvent('navbar', 'click to see user page', { label: 'user-icon' })}>
           <FaUserCircle />
         </Link>
       </div>
@@ -51,4 +55,4 @@ const Navbar = ({ isTop, setSearchWord }) => {
   )
 }
 
-export default Navbar;
+export default React.memo(Navbar)

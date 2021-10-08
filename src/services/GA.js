@@ -31,15 +31,14 @@ export const logPageView = () => {
 // category: 'User', 'Navigation', 'App Editing'
 // action: 'Clicked Delete', 'Added a component', 'Deleted account'
 // label:  'Added a component' action, we could add the name of a component as the label. E.g. 'Survey', 'Heading', 'Button', etc.
-export const gaEvent = ({ category, action, param }) => {
-	console.log('gaEvent', category, action)
+export const gaEvent = (category, action, param) => {
+	console.log('gaEvent:', category, action)
 	if (!category || !action) {
 		return console.warn('category and action is required')
 	}
-	if (typeof param == 'number') {
-		ReactGA.event({ category, action, value: param })
-	} else if (typeof param == 'string') {
-		ReactGA.event({ category, action, label: param })
+	if (param) {
+    const { value, label } = param
+		ReactGA.event({ category, action, value, label })
 	} else {
 		ReactGA.event({ category, action })
 	}

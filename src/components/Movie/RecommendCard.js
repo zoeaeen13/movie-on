@@ -1,6 +1,7 @@
 import React from 'react'
 import { createModel, removeCards } from '../../utils'
 import MovieDetail from './MovieDetail'
+import { gaEvent } from '../../services/GA'
 
 const  RecommendCard = ({ data }) => {
   const { date_in_theater, main_taiwan_name, internal } = data
@@ -10,10 +11,11 @@ const  RecommendCard = ({ data }) => {
     setTimeout(() => {
       createModel(<MovieDetail id={internal} />)
     }, 500)
+    gaEvent('movieList', 'click to see movie detail', { value: internal })
   }
 
   return (
-    <div className="recommend-card" onClick={onClickCard}>
+    <div className="recommend-card overlay" onClick={onClickCard}>
       <div className="recommend-card-img">
         <img src={data.img} />
       </div>

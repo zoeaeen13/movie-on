@@ -7,6 +7,7 @@ import { MovieCard } from '../../components/Movie'
 import { MOVIE_TYPE, RANKING_TYPE, SCORE_OPTIONS } from '../../constants'
 import { getMovies } from '../../api'
 import { removeCards } from '../../utils'
+import { gaEvent } from '../../services/GA'
 
 // 設定初始年份
 const startYear = 1980
@@ -33,12 +34,23 @@ const Browse = () => {
   })
 
   const handleConditionChange = (type, value) => {
+    gaEvent('browse', `select movie by ${type}`, { label: value })
     setConditions({...conditions, [type]: value})
   }
 
   const debouncedOnYearChange = debounce(([start_year, end_year]) => {
+    gaEvent('browse', 'select movie by year', { label: `${start_year}-${end_year}` })
     setConditions({...conditions, start_year, end_year })
   }, 500)
+
+  const onTypeSelect = (value) => {
+    const featureId = find(movieTypes, {type: value}).id
+    handleConditionChange('feature', featureId)
+  }
+
+  const onRankingTypeChange = (value) => {
+    handleConditionChange('sort', value)
+  }
 
   const fetchMovies = async (start) => {
     setLoading(true)
@@ -67,7 +79,10 @@ const Browse = () => {
   }, [conditions])
 
   useEffect(() => {
-    if (isBottom && movies.length) fetchMovies(movies.length)
+    if (isBottom && movies.length) {
+      gaEvent('browse', 'scroll to bottom')
+      fetchMovies(movies.length)
+    }
   }, [isBottom])
 
   useEffect(() => {
@@ -84,9 +99,6 @@ const Browse = () => {
     }
   }, [])
 
-  const renderRadioButtons = () => {
-
-  }
 
   return (
     <Layout className={`browse-wrapper ${loading && 'loading'}`}>
@@ -111,7 +123,8 @@ const Browse = () => {
             <Dropdown
               title={find(movieTypes, {id: conditions.feature}).name}
               activeKey={conditions.feature}
-              onSelect={(value) => handleConditionChange('feature', find(movieTypes, {type: value}).id)}>
+              onClick={() => gaEvent('browse', 'click to select movie type')}
+              onSelect={onTypeSelect}>
               {movieTypes.map(({ name, type }, index) => {
                 return (<Dropdown.Item key={type} eventKey={type} children={name} />)
               })}
@@ -121,9 +134,7 @@ const Browse = () => {
               name="radioList"
               value={conditions.value}
               appearance="picker"
-              onChange={value => {
-                handleConditionChange('sort', value)
-              }}
+              onChange={onRankingTypeChange}
             >
               {RANKING_TYPE.map(({ name, value, color }) => {
                 return <Radio style={{ backgroundColor: `${(conditions.sort === value) ? color : ''}` }} key={value} value={value}>{name}</Radio>
@@ -149,6 +160,7 @@ const Browse = () => {
               const [parent, child] = selectedPaths
               handleConditionChange(parent.value , child.value[child.value.length - 1])  
             }}
+            onClick={() => gaEvent('browse', 'click to limit movie-ranking score')}
             renderValue={renderScoreValues}
           />
         </div>

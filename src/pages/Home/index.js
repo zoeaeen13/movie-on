@@ -12,7 +12,6 @@ const Home = () => {
   const [comedy] = useFetchMovies({ feature: MOVIE_TYPE['Comedy'].id })
   const [ScienceFiction] = useFetchMovies({ feature: MOVIE_TYPE['Sci-Fi'].id })
 
-
   return (
     <Layout className={`${loading && 'loading'}`}>
       <Banner/>
