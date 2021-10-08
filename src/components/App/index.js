@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { intersection, isEmpty } from 'lodash'
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from '../../pages/Home'
@@ -9,6 +9,7 @@ import BrowsePage from '../../pages/Browse'
 import Navbar from './Navbar'
 import { removeCards } from '../../utils'
 import UserProvider from "../../providers/UserProvider";
+import { initGA } from '../../services/GA'
 
 const App = () => {
   const [isTop, setTop] = useState(true)
@@ -26,6 +27,10 @@ const App = () => {
       removeCards()
     }
   })
+
+  useEffect(() => {
+    initGA()
+  }, [])
 
   return (
     <UserProvider>
