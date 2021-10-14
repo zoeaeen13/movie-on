@@ -10,15 +10,15 @@
 
 #### 首頁
 提供各類別的排行電影
-[![](https://i.imgur.com/76PXZ7C.jpg)](https://zoeaeen13.github.io/movie-on/#/)
+![](https://i.imgur.com/76PXZ7C.jpg)
 
 #### 電影資訊
 點擊觀看電影預告，劇情及演員及導演資訊
-[![](https://i.imgur.com/D0T2yrh.jpg)](https://zoeaeen13.github.io/movie-on/#/)
+![](https://i.imgur.com/D0T2yrh.jpg)
 
 #### 搜尋及篩選電影
 電影分類頁提供各種搜尋條件，結合可找出目前期待觀看的片子，降低踩雷機率
-[![](https://i.imgur.com/Y4CU41m.jpg)](https://zoeaeen13.github.io/movie-on/#/browse)
+![](https://i.imgur.com/Y4CU41m.jpg)
 
 
 ---

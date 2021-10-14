@@ -25,7 +25,6 @@
     "styled-components": "^5.3.1",
     "web-vitals": "^1.1.2"
   },
-  "homepage": "http://zoeaeen13.github.io/movie-on",
   "scripts": {
     "start": "PORT=5000 react-scripts start",
     "build": "react-scripts build",
