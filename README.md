@@ -1,4 +1,6 @@
-## MoiveOn：整合了 IMDb、爛番茄及豆瓣的影評搜索網站
+# MoiveOn
+
+A movie introduction website which enables search for rating data, with the integration of IMDb, RottenTomatoes, and Douban
 
 多達 40,000 部電影的評分搜尋系統，整合各大平台，能客製化條件搜尋自己想看的電影，讓推薦電影不再是煩惱！
 
